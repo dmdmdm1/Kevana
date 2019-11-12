@@ -5,7 +5,8 @@ import AddProject from './AddProject';
 class ProjectList extends React.Component {
 
   state = {
-    projects: []
+    projects: [],
+    isLoading: true
   }
 
   getAllProjects = () => {
@@ -14,7 +15,7 @@ class ProjectList extends React.Component {
       // use console.log !
       console.log("response.data : " + JSON.stringify(response.data))
 
-      this.setState({ projects: response.data }) // this triggers a re-render
+      this.setState({ projects: response.data, isLoading: false }) // this triggers a re-render
 
     })
   }
@@ -36,7 +37,8 @@ class ProjectList extends React.Component {
       <div>
         <div id="project-list-container">
           <h1>Projects</h1>
-          {this.state.projects.length === 0 ? <h2>Loading...</h2> : null}
+          {this.state.isLoading ? <h2>Loading...</h2> : null}
+          {(!this.state.isLoading && this.state.projects.length === 0) ? <h2>no projects so far...</h2> : null}
           {this.state.projects.map(p =>
             <div key={p._id}>Title: {p.title} -- Desc: {p.description}</div>
           )}

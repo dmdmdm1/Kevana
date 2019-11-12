@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios'
 
-class Signup extends React.Component {
+class Login extends React.Component {
 
   state = {
     username: '',
@@ -10,9 +10,8 @@ class Signup extends React.Component {
 
   submitHandler = (event) => {
     event.preventDefault()
-    axios.post('/api/auth/signup', this.state).then((response) => {
+    axios.post('/api/auth/login', this.state).then((response) => {
       this.props.updateUser(response.data)
-      this.props.history.push('/profile')
     }).catch(() => { })
   }
 
@@ -25,7 +24,7 @@ class Signup extends React.Component {
   render() {
     return (
       <div>
-        SIGNUP:
+        LOGIN:
         <form onSubmit={this.submitHandler}>
           <input name="username" onChange={this.changeHandler} value={this.state.username} type="text" placeholder="username"></input>
           <br></br>
@@ -38,4 +37,4 @@ class Signup extends React.Component {
 
 }
 
-export default Signup;
+export default Login;

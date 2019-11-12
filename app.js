@@ -45,6 +45,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// this needs to be after all the other setup (i.e. the order is important )
 app.use('/', indexRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/projects', projectsRouter);
@@ -63,7 +64,7 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.json({ message: '^/[^error].*+????????????/$' });
 });
 
 module.exports = app;

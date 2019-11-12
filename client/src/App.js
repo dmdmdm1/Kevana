@@ -1,7 +1,8 @@
 import React from 'react';
 import ProjectList from './components/ProjectList';
 import Signup from './components/Signup';
-import { Switch, Route } from 'react-router-dom'
+import { Redirect, Switch, Route } from 'react-router-dom'
+import Login from './components/Login';
 
 
 class App extends React.Component {
@@ -19,11 +20,22 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        Hello, {this.state.loggedInUser ? this.state.loggedInUser.username : 'Stranger'} !
         <Switch>
-          <Route path="/projects" component={ProjectList}></Route>
+          <Route path="/profile" component={ProjectList}></Route>
+          <Route path="/profile" render={() => <ProjectList></ProjectList>}></Route>
           <Route path="/signup" render={
-            () => <Signup updateUser={this.updateUserHandler}></Signup>
-          }>
+            () => {
+              if (this.state.loggedInUser) {
+                return <Redirect to="/profile"></Redirect>
+              } else {
+                return <div>
+                  <Login updateUser={this.updateUserHandler}></Login>
+                  <div> ------------------------ </div>
+                  <Signup history={this.props.history} updateUser={this.updateUserHandler}></Signup>
+                </div>
+              }
+            }}>
           </Route>
         </Switch>
       </div >

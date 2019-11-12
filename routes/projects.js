@@ -8,7 +8,7 @@ let Task = require('../models/task')
 router.get('/', function (req, res, next) {
 
   // we're in express land !! ()
-  Project.find().then((projects) => {
+  Project.find({ owner: req.user._id }).then((projects) => {
     res.json(projects)
   })
 });
@@ -39,7 +39,8 @@ router.post('/', (req, res, next) => {
   // { title: 'Abc', description: 'Whatever' }
   Project.create({
     title: req.body.title,
-    description: req.body.description
+    description: req.body.description,
+    owner: req.user._id
   })
     .then(response => {
       // { _id: '1283t2iu3t427g', title: 'Abc', description: 'Whatever' }
