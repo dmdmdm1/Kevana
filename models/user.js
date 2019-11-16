@@ -4,7 +4,9 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
   email: String,
-  password: String
+  password: String,
+  favorites : [ {type: Schema.Types.ObjectId, ref: 'Video'}],
+  follows: [{ type: Schema.Types.ObjectId, ref: 'User'}]
 }, {
   toJSON: {
     transform: function (doc, ret) {
