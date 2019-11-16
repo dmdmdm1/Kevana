@@ -20,7 +20,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        Hello, {this.state.loggedInUser ? this.state.loggedInUser.username : 'Stranger'} !
+        Hello, {this.state.loggedInUser ? this.state.loggedInUser.email : 'Stranger'} !
         <Switch>
           <Route path="/profile" component={ProjectList}></Route>
           <Route path="/profile" render={() => <ProjectList></ProjectList>}></Route>

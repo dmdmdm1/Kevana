@@ -4,7 +4,7 @@ import axios from 'axios'
 class Signup extends React.Component {
 
   state = {
-    username: '',
+    email: '',
     password: '',
   }
 
@@ -27,7 +27,7 @@ class Signup extends React.Component {
       <div>
         SIGNUP:
         <form onSubmit={this.submitHandler}>
-          <input name="username" onChange={this.changeHandler} value={this.state.username} type="text" placeholder="username"></input>
+          <input name="email" onChange={this.changeHandler} value={this.state.email} type="text" placeholder="email"></input>
           <br></br>
           <input name="password" onChange={this.changeHandler} value={this.state.password} type="text" placeholder="password"></input>
           <button type="submit">Submit</button>

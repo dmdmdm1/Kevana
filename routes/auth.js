@@ -17,11 +17,11 @@ router.get("/checkuser", (req, res, next) => {
 
 // /api/auth/signup
 router.post('/signup', (req, res, next) => {
-  const username = req.body.username;
+  const email = req.body.email;
   const password = req.body.password;
 
-  if (!username || !password) {
-    res.status(400).json({ message: 'Provide username and password' });
+  if (!email || !password) {
+    res.status(400).json({ message: 'Provide email and password' });
     return;
   }
 
@@ -30,10 +30,10 @@ router.post('/signup', (req, res, next) => {
     return;
   }
 
-  User.findOne({ username }).then((foundUser) => {
+  User.findOne({ email }).then((foundUser) => {
 
     if (foundUser) {
-      res.status(400).json({ message: 'Username taken. Choose another one.' });
+      res.status(400).json({ message: 'Email taken. Choose another one.' });
       return;
     }
 
@@ -41,7 +41,7 @@ router.post('/signup', (req, res, next) => {
     const hashPass = bcrypt.hashSync(password, salt);
 
     const aNewUser = new User({
-      username: username,
+      email: email,
       password: hashPass
     });
 
