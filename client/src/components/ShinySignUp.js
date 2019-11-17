@@ -14,13 +14,14 @@ import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import { Link as RouterLink } from "react-router-dom";
+//import file from "./signup_unsplash.jpg";
 
 const withMyStyles = withStyles(theme => ({
   root: {
     height: "100vh"
   },
   image: {
-    backgroundImage: "url(https://source.unsplash.com/random)",
+    backgroundImage: "url(./signup_unsplash.jpg)",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     backgroundPosition: "center"
@@ -86,7 +87,7 @@ class ShinyLogin extends React.Component {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in
+              Sign up
             </Typography>
             <form className={classes.form} noValidate>
               <TextField

@@ -5,6 +5,7 @@ import { Redirect, Switch, Route } from "react-router-dom";
 import Login from "./components/Login";
 import ShinyLogin from "./components/ShinyLogin";
 import ShinySignUp from "./components/ShinySignUp";
+import Home from "./components/Home";
 
 class App extends React.Component {
   state = {
@@ -30,7 +31,7 @@ class App extends React.Component {
             path="/signup"
             render={() => {
               if (this.state.loggedInUser) {
-                return <Redirect to="/profile"></Redirect>;
+                return <Redirect to="/home"></Redirect>;
               } else {
                 return (
                   <ShinySignUp
@@ -45,7 +46,7 @@ class App extends React.Component {
             path="/login"
             render={() => {
               if (this.state.loggedInUser) {
-                return <Redirect to="/profile"></Redirect>;
+                return <Redirect to="/home"></Redirect>;
               } else {
                 return (
                   <ShinyLogin
@@ -56,6 +57,7 @@ class App extends React.Component {
               }
             }}
           ></Route>
+          <Route exact path={"/home"} component={Home} />
         </Switch>
       </div>
     );
