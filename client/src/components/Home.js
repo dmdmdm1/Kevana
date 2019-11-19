@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import AllVideos from "./AllVideos"
+import { Link } from "react-router-dom";
 
 export default class Home extends Component {
 
@@ -11,13 +12,10 @@ axios.get("/api/videos").then(res => console.log(res))
   }
 
   signOutHandler = (event) => {
-    console.log("Hey Mir!")
     axios
       .get("/api/auth/logout", this.state)
       .then(response => {
-        console.log("log out response", response)
-        this.props.updateUser(response.data);
-        this.props.history.push("/profile");
+        this.props.history.push("/login");
       })
       .catch((error) => console.log("logout page, something went wrong", error));
   }
@@ -25,12 +23,12 @@ axios.get("/api/videos").then(res => console.log(res))
     return (
       <div>
         <div>
-          <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">
+          <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <Link className="navbar-brand" href="#">
               Kevana
-            </a>
+            </Link>
             <button
-              class="navbar-toggler"
+              className="navbar-toggler"
               type="button"
               data-toggle="collapse"
               data-target="#navbarNavDropdown"
@@ -38,80 +36,51 @@ axios.get("/api/videos").then(res => console.log(res))
               aria-expanded="false"
               aria-label="Toggle navigation"
             >
-              <span class="navbar-toggler-icon"></span>
+              <span className="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-              <ul class="navbar-nav">
-                <li class="nav-item active">
-                  <a class="nav-link" href="#">
-                    Home <span class="sr-only">(current)</span>
-                  </a>
+            <div className="collapse navbar-collapse" id="navbarNavDropdown">
+              <ul className="navbar-nav">
+                <li className="nav-item active">
+                  <Link className="nav-link" to="/home">
+                    Home <span className="sr-only">(current)</span>
+                  </Link>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">
+                <li className="nav-item">
+                  <Link className="nav-link" to="#">
                     Profile
-                  </a>
+                  </Link>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">
+                <li className="nav-item">
+                  <Link className="nav-link" href="#">
                     Add new video
-                  </a>
+                  </Link>
                 </li>
-                <li class="nav-item">
-                  <button class="nav-link" onClick={this.signOutHandler} >
+                <li className="nav-item">
+                  <button className="nav-link" onClick={this.signOutHandler} >
                     Logout
                   </button>
-                </li>
-                <li class="nav-item dropdown">
-                  <a
-                    class="nav-link dropdown-toggle"
-                    href="#"
-                    id="navbarDropdownMenuLink"
-                    role="button"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    Dropdown link
-                  </a>
-                  <div
-                    class="dropdown-menu"
-                    aria-labelledby="navbarDropdownMenuLink"
-                  >
-                    <a class="dropdown-item" href="#">
-                      Action
-                    </a>
-                    <a class="dropdown-item" href="#">
-                      Another action
-                    </a>
-                    <a class="dropdown-item" href="#">
-                      Something else here
-                    </a>
-                  </div>
                 </li>
               </ul>
             </div>
           </nav>
         </div>
-        <div class="text-center">
-          <nav class="navbar navbar-light bg-light">
-            <form class="form-inline">
+        <div className="header">
+          <form>
+            <h1>Search for amazing yoga videos</h1>
+            <div className="form-box">
               <input
-                class="form-control mr-sm-2"
-                type="search"
+                type="text"
+                className="search-field business"
                 placeholder="Search"
-                aria-label="Search"
               ></input>
-              <button
-                class="btn btn-outline-success my-2 my-sm-0"
-                type="submit"
-              >
-                Search
+              <button className="search-btn" type="button">
+                Go
               </button>
-            </form>
-          </nav>
-          <AllVideos />
+            </div>
+          </form>
         </div>
+    
+    <AllVideos />
       </div>
     );
   }
