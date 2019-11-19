@@ -1,6 +1,19 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 export default class Home extends Component {
+
+  signOutHandler = (event) => {
+    console.log("Hey Mir!")
+    axios
+      .get("/api/auth/logout", this.state)
+      .then(response => {
+        console.log("log out response", response)
+        this.props.updateUser(response.data);
+        this.props.history.push("/profile");
+      })
+      .catch((error) => console.log("logout page, something went wrong", error));
+  }
   render() {
     return (
       <div>
@@ -36,6 +49,11 @@ export default class Home extends Component {
                   <a class="nav-link" href="#">
                     Add new video
                   </a>
+                </li>
+                <li class="nav-item">
+                  <button class="nav-link" onClick={this.signOutHandler} >
+                    Logout
+                  </button>
                 </li>
                 <li class="nav-item dropdown">
                   <a

@@ -1,10 +1,8 @@
 import React from "react";
 import ProjectList from "./components/ProjectList";
-import Signup from "./components/Signup";
-import { Redirect, Switch, Route } from "react-router-dom";
-import Login from "./components/Login";
-import ShinyLogin from "./components/ShinyLogin";
 import ShinySignUp from "./components/ShinySignUp";
+import { Redirect, Switch, Route } from "react-router-dom";
+import ShinyLogin from "./components/ShinyLogin";
 import Home from "./components/Home";
 
 class App extends React.Component {

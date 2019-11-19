@@ -45,7 +45,7 @@ const withMyStyles = withStyles(theme => ({
   }
 }));
 
-class ShinyLogin extends React.Component {
+class ShinySignUp extends React.Component {
   state = {
     email: "",
     password: ""
@@ -59,7 +59,7 @@ class ShinyLogin extends React.Component {
         this.props.updateUser(response.data);
         this.props.history.push("/profile");
       })
-      .catch(() => {});
+      .catch(() => { });
   };
 
   onEmailChange = event => {
@@ -89,7 +89,7 @@ class ShinyLogin extends React.Component {
             <Typography component="h1" variant="h5">
               Sign up
             </Typography>
-            <form className={classes.form} noValidate>
+            <form className={classes.form} onSubmit={this.submitHandler} noValidate>
               <TextField
                 variant="outlined"
                 margin="normal"
@@ -153,4 +153,4 @@ class ShinyLogin extends React.Component {
   }
 }
 
-export default withMyStyles(ShinyLogin);
+export default withMyStyles(ShinySignUp);

@@ -52,13 +52,15 @@ class ShinyLogin extends React.Component {
 
   submitHandler = event => {
     event.preventDefault();
+    console.log("clicked")
     axios
-      .post("/api/auth/signup", this.state)
+      .post("/api/auth/login", this.state)
       .then(response => {
+        console.log("response", response)
         this.props.updateUser(response.data);
         this.props.history.push("/profile");
       })
-      .catch(() => {});
+      .catch((error) => console.log("login page, something went wrong", error));
   };
 
   onEmailChange = event => {
@@ -88,7 +90,7 @@ class ShinyLogin extends React.Component {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <form className={classes.form} noValidate>
+            <form className={classes.form} onSubmit={this.submitHandler} noValidate>
               <TextField
                 variant="outlined"
                 margin="normal"
