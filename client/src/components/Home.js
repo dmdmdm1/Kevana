@@ -4,13 +4,10 @@ import axios from "axios";
 export default class Home extends Component {
 
   signOutHandler = (event) => {
-    console.log("Hey Mir!")
     axios
       .get("/api/auth/logout", this.state)
       .then(response => {
-        console.log("log out response", response)
-        this.props.updateUser(response.data);
-        this.props.history.push("/profile");
+        this.props.history.push("/login");
       })
       .catch((error) => console.log("logout page, something went wrong", error));
   }
