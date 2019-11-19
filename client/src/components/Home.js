@@ -5,7 +5,7 @@ export default class Home extends Component {
     return (
       <div>
         <div>
-          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-background">
             <a class="navbar-brand" href="#">
               Kevana
             </a>
@@ -68,23 +68,21 @@ export default class Home extends Component {
             </div>
           </nav>
         </div>
-        <div class="text-center">
-          <nav class="navbar navbar-light bg-light">
-            <form class="form-inline">
+
+        <div class="header">
+          <form>
+            <h1>Search for amazing yoga videos</h1>
+            <div class="form-box">
               <input
-                class="form-control mr-sm-2"
-                type="search"
+                type="text"
+                class="search-field business"
                 placeholder="Search"
-                aria-label="Search"
               ></input>
-              <button
-                class="btn btn-outline-success my-2 my-sm-0"
-                type="submit"
-              >
-                Search
+              <button class="search-btn" type="button">
+                Go
               </button>
-            </form>
-          </nav>
+            </div>
+          </form>
         </div>
       </div>
     );

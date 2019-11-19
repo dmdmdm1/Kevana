@@ -7,6 +7,8 @@ import ShinyLogin from "./components/ShinyLogin";
 import ShinySignUp from "./components/ShinySignUp";
 import Home from "./components/Home";
 
+import "./App.css";
+
 class App extends React.Component {
   state = {
     loggedInUser: this.props.user
