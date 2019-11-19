@@ -58,23 +58,20 @@ export default class Home extends Component {
             </div>
           </nav>
         </div>
-        <div className="text-center">
-          <nav className="navbar navbar-light bg-light">
-            <form className="form-inline">
+        <div className="header">
+          <form>
+            <h1>Search for amazing yoga videos</h1>
+            <div className="form-box">
               <input
-                className="form-control mr-sm-2"
-                type="search"
+                type="text"
+                className="search-field business"
                 placeholder="Search"
-                aria-label="Search"
               ></input>
-              <button
-                className="btn btn-outline-success my-2 my-sm-0"
-                type="submit"
-              >
-                Search
+              <button className="search-btn" type="button">
+                Go
               </button>
-            </form>
-          </nav>
+            </div>
+          </form>
         </div>
       </div>
     );
