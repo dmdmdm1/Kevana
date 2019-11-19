@@ -7,13 +7,13 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
-import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import { Link as RouterLink } from "react-router-dom";
+import { withRouter } from 'react-router-dom'
 
 const withMyStyles = withStyles(theme => ({
   root: {
@@ -52,13 +52,13 @@ class ShinyLogin extends React.Component {
 
   submitHandler = event => {
     event.preventDefault();
+    console.log("clicked")
     axios
-      .post("/api/auth/signup", this.state)
+      .post("/api/auth/login", this.state)
       .then(response => {
-        this.props.updateUser(response.data);
         this.props.history.push("/profile");
       })
-      .catch(() => {});
+      .catch((error) => console.log("login page, something went wrong", error));
   };
 
   onEmailChange = event => {
@@ -75,6 +75,7 @@ class ShinyLogin extends React.Component {
 
   render() {
     const classes = this.props.classes;
+    // console.log("hey props", this.props.updateUser)
 
     return (
       <Grid container component="main" className={classes.root}>
@@ -88,7 +89,7 @@ class ShinyLogin extends React.Component {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <form className={classes.form} noValidate>
+            <form className={classes.form} onSubmit={this.submitHandler} noValidate>
               <TextField
                 variant="outlined"
                 margin="normal"
@@ -152,4 +153,4 @@ class ShinyLogin extends React.Component {
   }
 }
 
-export default withMyStyles(ShinyLogin);
+export default withMyStyles(withRouter(ShinyLogin));
