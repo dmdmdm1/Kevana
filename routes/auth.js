@@ -82,4 +82,11 @@ router.post('/login', (req, res, next) => {
   })(req, res, next);
 });
 
+// /api/auth/logout
+
+router.get('/logout', function (req, res) {
+  req.logout();
+  res.json({ message: 'user logged out ' });
+});
+
 module.exports = router;
