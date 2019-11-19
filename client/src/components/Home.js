@@ -1,7 +1,14 @@
 import React, { Component } from "react";
 import axios from "axios";
+import AllVideos from "./AllVideos"
 
 export default class Home extends Component {
+
+
+  componentDidMount(){
+axios.get("/api/videos").then(res => console.log(res))
+
+  }
 
   signOutHandler = (event) => {
     console.log("Hey Mir!")
@@ -103,6 +110,7 @@ export default class Home extends Component {
               </button>
             </form>
           </nav>
+          <AllVideos />
         </div>
       </div>
     );
