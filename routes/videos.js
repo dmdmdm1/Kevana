@@ -20,6 +20,7 @@ router.get('/', function (req, res, next) {
 router.get('/:id', function (req, res, next) {
     console.log("single video request GET is called: " + req.params.id)
   Video.findById(req.params.id).then((video) => {
+    console.log("video: " + video)
       res.json(video)
   }).catch(err => {
     res.json(err);
@@ -36,6 +37,7 @@ router.post('/', (req, res, next) => {
   
   Video.create({
       owner : "5dd015c1eb56242e6d92f92f",
+      video_id: "UEEsdXn8oG8",
       link: "https://www.youtube.com/watch?v=UEEsdXn8oG8",
       title: "!Wake Up Yoga - 11 Minute Morning Yoga Practice - Yoga With Adriene",
       channel: "Yoga With Adriene",

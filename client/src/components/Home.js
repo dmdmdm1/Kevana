@@ -1,9 +1,15 @@
 import React, { Component } from "react";
 import axios from "axios";
+import AllVideos from "./AllVideos"
 import { Link } from "react-router-dom";
 
-
 export default class Home extends Component {
+
+
+  componentDidMount(){
+axios.get("/api/videos").then(res => console.log(res))
+
+  }
 
   signOutHandler = (event) => {
     axios
@@ -73,6 +79,8 @@ export default class Home extends Component {
             </div>
           </form>
         </div>
+    
+    <AllVideos />
       </div>
     );
   }
