@@ -2,15 +2,15 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const videoSchema = new Schema({
-  owner: { type: Schema.Types.ObjectId, ref: 'User'},
+  owner: { type: Schema.Types.ObjectId, ref: 'User' },
   video_id: String,
   link: String,
-  title : String,
+  title: String,
   channel: String,
-length: Number
+  length: Number
 
 
-}, 
+},
 );
 
 const Video = mongoose.model('Video', videoSchema);
