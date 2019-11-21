@@ -1,25 +1,60 @@
 import React, { Component } from "react";
 import axios from "axios";
-import AllVideos from "./AllVideos"
+import AllVideos from "./AllVideos";
 import { Link } from "react-router-dom";
 
 export default class Home extends Component {
-
-
-  componentDidMount(){
-axios.get("/api/videos").then(res => console.log(res))
-
+  state = {
+    search: "",
+    videos: [],
+    isLoading: true
+  };
+  componentDidMount() {
+    this.getAllVideos();
   }
 
-  signOutHandler = (event) => {
+  getAllVideos = () => {
+    axios.get("/api/videos").then(response => {
+      this.setState({ videos: response.data, isLoading: false }); // this triggers a re-render
+    });
+  };
+
+  searchHandler = event => {
+    this.setState({
+      search: event.target.value
+    });
+  };
+
+  searchButtonHandler = event => {
+    this.setState({
+      videos: this.state.videos.filter(video => {
+        return video.title
+          .toLowerCase()
+          .includes(this.state.search.toLowerCase());
+      })
+    });
+
+    // this.state.videos.map(video => {
+    //   if (video.title === this.state.search) {
+    //     console.log("match", video);
+    //     this.setState({
+    //       videos: [...video]
+    //     });
+    //   }
+    // });
+  };
+
+  signOutHandler = event => {
     axios
       .get("/api/auth/logout", this.state)
       .then(response => {
         this.props.history.push("/login");
       })
-      .catch((error) => console.log("logout page, something went wrong", error));
-  }
+      .catch(error => console.log("logout page, something went wrong", error));
+  };
   render() {
+    console.log(this.state.search);
+    console.log(this.state.videos);
     return (
       <div>
         <div>
@@ -56,7 +91,7 @@ axios.get("/api/videos").then(res => console.log(res))
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <button className="nav-link" onClick={this.signOutHandler} >
+                  <button className="nav-link" onClick={this.signOutHandler}>
                     Logout
                   </button>
                 </li>
@@ -69,18 +104,23 @@ axios.get("/api/videos").then(res => console.log(res))
             <h1>Search for amazing yoga videos</h1>
             <div className="form-box">
               <input
+                onChange={this.searchHandler}
                 type="text"
                 className="search-field business"
                 placeholder="Search"
               ></input>
-              <button className="search-btn" type="button">
+              <button
+                className="search-btn"
+                type="button"
+                onClick={this.searchButtonHandler}
+              >
                 Go
               </button>
             </div>
           </form>
         </div>
-    
-    <AllVideos />
+
+        <AllVideos videos={this.state.videos} search={this.state.search} />
       </div>
     );
   }
