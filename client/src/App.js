@@ -4,6 +4,7 @@ import ShinySignUp from "./components/ShinySignUp";
 import { Redirect, Switch, Route } from "react-router-dom";
 import ShinyLogin from "./components/ShinyLogin";
 import Home from "./components/Home";
+import SingleVideo from "./components/SingleVideo"
 import AddVideo from "./components/AddVideo";
 
 import "./App.css";
@@ -59,6 +60,7 @@ class App extends React.Component {
             }}
           ></Route>
           <Route exact path={"/home"} component={Home} />
+          <Route exact path={"/videos/:id"} component={Home} />
           <Route exact path="/add-video" component={AddVideo} />
         </Switch>
       </div>

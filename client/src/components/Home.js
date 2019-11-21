@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import AllVideos from "./AllVideos"
-import { Link } from "react-router-dom";
+import { Link, Switch, Route } from "react-router-dom";
+import SingleVideo from "./SingleVideo";
 
 export default class Home extends Component {
 
@@ -79,8 +80,10 @@ axios.get("/api/videos").then(res => console.log(res))
             </div>
           </form>
         </div>
-    
-    <AllVideos />
+    <Switch >
+      <AllVideos path='/home' />
+      <Route exact path='/videos/:id' component={SingleVideo} />  
+    </Switch>
       </div>
     );
   }
