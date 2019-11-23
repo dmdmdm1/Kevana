@@ -27,6 +27,7 @@ export default class Home extends Component {
   };
 
   searchButtonHandler = event => {
+    event.preventDefault();
     this.setState({
       videos: this.state.videos.filter(video => {
         return video.title
@@ -51,7 +52,7 @@ export default class Home extends Component {
     return (
       <div>
         <div className="header">
-          <form>
+          <form onSubmit={this.searchButtonHandler}>
             <h1>Search for amazing yoga videos</h1>
             <div className="form-box">
               <input
@@ -75,6 +76,7 @@ export default class Home extends Component {
             path="/home"
             videos={this.state.videos}
             search={this.state.search}
+            isLoading={this.state.isLoading}
           />
           <Route exact path="/videos/:id" component={SingleVideo} />
         </Switch>
