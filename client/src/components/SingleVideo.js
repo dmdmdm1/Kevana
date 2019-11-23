@@ -19,6 +19,7 @@ class SingleVideo extends React.Component {
   
     componentDidMount() {
       this.getSingleVideo()
+      console.log("hello!!!!!!!!!!!!!")
     }
     // video:
     // channel: "Yoga With Adriene"
@@ -31,6 +32,7 @@ class SingleVideo extends React.Component {
     // _id: "5dd433d24ba06d091480590e"
   
     render() {
+      console.log("mir!")
       return (
         <div>
           {this.state.video.title}
@@ -38,7 +40,7 @@ class SingleVideo extends React.Component {
           <ReactPlayer
   url={this.state.video.link}
 />
-<Link to={`/home`} >
+<Link to={`/`} >
                 Back to all videos </Link>
 
           {/* <div id="video-list-container">

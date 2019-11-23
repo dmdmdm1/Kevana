@@ -7,6 +7,8 @@ import ShinyLogin from "./components/ShinyLogin";
 import Home from "./components/Home";
 import AddVideo from "./components/AddVideo";
 import NavBar from "./components/NavBar";
+import SingleVideo from "./components/SingleVideo";
+
 
 import "./App.css";
 
@@ -49,10 +51,12 @@ class App extends React.Component {
       <div>
         <NavBar signOutHandler={this.signOutHandler} />
         <Switch>
-          <Route path="/profile" component={ProjectList} />
-          <Route path="/profile" render={ProjectList} />
+          <Route exact path="/profile" component={ProjectList} />
+          <Route exact path="/profile" render={ProjectList} />
           <Route exact path="/add-video" component={AddVideo} />
-          <Route path="/" component={Home} />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/videos/:id" component={SingleVideo} />
+
         </Switch>
       </div>
     );
