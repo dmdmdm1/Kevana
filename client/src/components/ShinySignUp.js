@@ -12,7 +12,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import axios from "axios";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, withRouter } from "react-router-dom";
 //import file from "./signup_unsplash.jpg";
 
 const withMyStyles = withStyles(theme => ({
@@ -56,9 +56,9 @@ class ShinySignUp extends React.Component {
       .post("/api/auth/signup", this.state)
       .then(response => {
         this.props.updateUser(response.data);
-        this.props.history.push("/profile");
+        this.props.history.push("/");
       })
-      .catch(() => { });
+      .catch(() => {});
   };
 
   onEmailChange = event => {
@@ -88,7 +88,11 @@ class ShinySignUp extends React.Component {
             <Typography component="h1" variant="h5">
               Sign up
             </Typography>
-            <form className={classes.form} onSubmit={this.submitHandler} noValidate>
+            <form
+              className={classes.form}
+              onSubmit={this.submitHandler}
+              noValidate
+            >
               <TextField
                 variant="outlined"
                 margin="normal"
@@ -139,7 +143,7 @@ class ShinySignUp extends React.Component {
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link component={RouterLink} to="/signup" variant="body2">
+                  <Link component={RouterLink} to="/" variant="body2">
                     {"Already have an account? Sign In"}
                   </Link>
                 </Grid>
@@ -152,4 +156,4 @@ class ShinySignUp extends React.Component {
   }
 }
 
-export default withMyStyles(ShinySignUp);
+export default withRouter(withMyStyles(ShinySignUp));

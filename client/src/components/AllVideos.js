@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import { Link } from "react-router-dom";
 
 class AllVideos extends React.Component {
   render() {
@@ -13,7 +13,9 @@ class AllVideos extends React.Component {
           ) : null}
           {this.props.videos.map(video => (
             <div key={video._id}>
-              Title: {video.title} -- video_id: {video.video_id}{" "}
+               <Link to={`/videos/${video._id}`} >
+                Title: {video.title} </Link>
+                -- video_id: {video.video_id}{" "}
             </div>
           ))}
         </div>
