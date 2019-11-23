@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { Component } from 'react'
 import ReactPlayer from 'react-player'
+import { Link } from "react-router-dom";
 
 class SingleVideo extends React.Component {
 
@@ -37,6 +38,8 @@ class SingleVideo extends React.Component {
           <ReactPlayer
   url={this.state.video.link}
 />
+<Link to={`/home`} >
+                Back to all videos </Link>
 
           {/* <div id="video-list-container">
             <h1>Yoga Videos from our database</h1>
