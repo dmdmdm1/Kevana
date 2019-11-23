@@ -21,7 +21,7 @@ export default function NavBar(props) {
       <div className="collapse navbar-collapse" id="navbarNavDropdown">
         <ul className="navbar-nav">
           <li className="nav-item active">
-            <Link className="nav-link" to="/home">
+            <Link className="nav-link" to="/">
               Home <span className="sr-only">(current)</span>
             </Link>
           </li>
@@ -31,7 +31,7 @@ export default function NavBar(props) {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" href="#">
+            <Link className="nav-link" to="/add-video">
               Add new video
             </Link>
           </li>
