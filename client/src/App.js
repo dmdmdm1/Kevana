@@ -1,11 +1,12 @@
 import React from "react";
+import axios from "axios";
 import ProjectList from "./components/ProjectList";
 import ShinySignUp from "./components/ShinySignUp";
-import { Redirect, Switch, Route } from "react-router-dom";
+import { withRouter, Switch, Route } from "react-router-dom";
 import ShinyLogin from "./components/ShinyLogin";
 import Home from "./components/Home";
-import SingleVideo from "./components/SingleVideo"
 import AddVideo from "./components/AddVideo";
+import NavBar from "./components/NavBar";
 
 import "./App.css";
 
@@ -20,52 +21,42 @@ class App extends React.Component {
     });
   };
 
+  signOutHandler = event => {
+    axios
+      .get("/api/auth/logout", this.state)
+      .then(response => {
+        this.updateUserHandler(null);
+        this.props.history.push("/");
+      })
+      .catch(error => console.log("logout page, something went wrong", error));
+  };
+
   render() {
+    if (!this.state.loggedInUser) {
+      return (
+        <Switch>
+          <Route path="/signup">
+            <ShinySignUp updateUser={this.updateUserHandler} />
+          </Route>
+          <Route>
+            <ShinyLogin updateUser={this.updateUserHandler} />
+          </Route>
+        </Switch>
+      );
+    }
+
     return (
       <div>
+        <NavBar signOutHandler={this.signOutHandler} />
         <Switch>
-          <Route path="/profile" component={ProjectList}></Route>
-          <Route
-            path="/profile"
-            render={() => <ProjectList></ProjectList>}
-          ></Route>
-          <Route
-            path="/signup"
-            render={() => {
-              if (this.state.loggedInUser) {
-                return <Redirect to="/home"></Redirect>;
-              } else {
-                return (
-                  <ShinySignUp
-                    history={this.props.history}
-                    updateUser={this.updateUserHandler}
-                  ></ShinySignUp>
-                );
-              }
-            }}
-          ></Route>
-          <Route
-            path="/login"
-            render={() => {
-              if (this.state.loggedInUser) {
-                return <Redirect to="/home"></Redirect>;
-              } else {
-                return (
-                  <ShinyLogin
-                    history={this.props.history}
-                    updateUser={this.updateUserHandler}
-                  ></ShinyLogin>
-                );
-              }
-            }}
-          ></Route>
-          <Route exact path={"/home"} component={Home} />
-          <Route exact path={"/videos/:id"} component={Home} />
+          <Route path="/profile" component={ProjectList} />
+          <Route path="/profile" render={ProjectList} />
           <Route exact path="/add-video" component={AddVideo} />
+          <Route path="/" component={Home} />
         </Switch>
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);

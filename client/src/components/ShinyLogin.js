@@ -13,7 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import { Link as RouterLink } from "react-router-dom";
-import { withRouter } from 'react-router-dom'
+import { withRouter } from "react-router-dom";
 
 const withMyStyles = withStyles(theme => ({
   root: {
@@ -52,13 +52,13 @@ class ShinyLogin extends React.Component {
 
   submitHandler = event => {
     event.preventDefault();
-    console.log("clicked")
+    console.log("clicked");
     axios
       .post("/api/auth/login", this.state)
       .then(response => {
-        this.props.history.push("/profile");
+        this.props.updateUser(response.data);
       })
-      .catch((error) => console.log("login page, something went wrong", error));
+      .catch(error => console.log("login page, something went wrong", error));
   };
 
   onEmailChange = event => {
@@ -89,7 +89,11 @@ class ShinyLogin extends React.Component {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <form className={classes.form} onSubmit={this.submitHandler} noValidate>
+            <form
+              className={classes.form}
+              onSubmit={this.submitHandler}
+              noValidate
+            >
               <TextField
                 variant="outlined"
                 margin="normal"

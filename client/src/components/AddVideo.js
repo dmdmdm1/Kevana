@@ -10,7 +10,8 @@ export default class AddVideo extends Component {
   onVideoCreation = () => {
     axios.post('/api/videos', { videoUrl: this.state.videoUrl })
       .then(response => {
-        this.props.history.push("") // go to created video 
+        console.log(response)
+        this.props.history.push(`videos/${response.data._id}`) // go to created video 
       })
   }
 
