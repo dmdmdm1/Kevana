@@ -4,6 +4,7 @@ var { Duration } = require('luxon')
 var router = express.Router();
 
 let Video = require('../models/video')
+let History = require('../models/history')
 
 // GET /api/videos
 router.get('/', function (req, res, next) {
@@ -61,5 +62,22 @@ router.post('/', (req, res, next) => {
     res.status(400).json({ error: "Invalid URL supplied!" });
   }
 })
+
+// POST api/videos/practiced/436267434762633253
+router.post('/practiced/:id', (req, res, next) => {
+  console.log(req.params.id)
+
+  History.create({
+    name: req.user._id,
+    practiced_video: req.params.id
+  }).then(response => {
+    console.log("response",response)
+    res.json(response)
+  })
+  .catch(error => {
+    console.log(error)
+    res.status(500).json({ message: error.message });
+  })
+});
 
 module.exports = router;

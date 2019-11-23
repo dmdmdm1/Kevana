@@ -21,6 +21,14 @@ class SingleVideo extends React.Component {
       this.getSingleVideo()
       console.log("hello!!!!!!!!!!!!!")
     }
+
+    practicedButtonHandler = () => {
+      axios.post(`/api/videos/practiced/${this.props.match.params.id}`)
+      .then(response => {
+        console.log(response)
+        // this.props.history.push(`videos/${response.data._id}`) // go to created video 
+      })
+    }
     // video:
     // channel: "Yoga With Adriene"
     // length: 693
@@ -40,6 +48,12 @@ class SingleVideo extends React.Component {
           <ReactPlayer
   url={this.state.video.link}
 />
+<button
+                type="button"
+                onClick={this.practicedButtonHandler}
+              >
+                I practiced this video
+              </button>
 <Link to={`/`} >
                 Back to all videos </Link>
 
