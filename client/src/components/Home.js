@@ -72,7 +72,7 @@ export default class Home extends Component {
         </div>
         <Switch>
           <AllVideos
-            path="/home"
+            path="/"
             videos={this.state.videos}
             search={this.state.search}
           />
