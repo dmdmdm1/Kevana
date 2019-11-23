@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
-import AllVideos from "./AllVideos";
-import { Link } from "react-router-dom";
+import AllVideos from "./AllVideos"
+import { Link, Switch, Route } from "react-router-dom";
+import SingleVideo from "./SingleVideo";
 
 export default class Home extends Component {
   state = {
@@ -119,8 +120,10 @@ export default class Home extends Component {
             </div>
           </form>
         </div>
-
-        <AllVideos videos={this.state.videos} search={this.state.search} />
+    <Switch >
+      <AllVideos path='/home' videos={this.state.videos} search={this.state.search}  />
+      <Route exact path='/videos/:id' component={SingleVideo} />  
+    </Switch>
       </div>
     );
   }
