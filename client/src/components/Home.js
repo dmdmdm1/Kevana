@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import axios from "axios";
 import AllVideos from "./AllVideos";
 import { Link, Switch, Route } from "react-router-dom";
-import SingleVideo from "./SingleVideo";
 
 export default class Home extends Component {
   state = {
@@ -71,15 +70,15 @@ export default class Home extends Component {
             </div>
           </form>
         </div>
-        <Switch>
+
           <AllVideos
-            path="/home"
+          exact
+            path="/"
             videos={this.state.videos}
             search={this.state.search}
             isLoading={this.state.isLoading}
           />
-          <Route exact path="/videos/:id" component={SingleVideo} />
-        </Switch>
+
       </div>
     );
   }
