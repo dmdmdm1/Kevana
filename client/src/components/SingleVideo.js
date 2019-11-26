@@ -22,7 +22,7 @@ class SingleVideo extends React.Component {
 
   practicedButtonHandler = () => {
     axios
-      .post(`/api/videos/practiced/${this.props.match.params.id}`)
+      .post(`/api/history/practiced/${this.props.match.params.id}`)
       .then(response => {
         console.log(response);
         // this.props.history.push(`videos/${response.data._id}`) // go to created video
