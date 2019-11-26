@@ -20,8 +20,10 @@ router.get("/", function(req, res, next) {
 
 // GET /api/videos/o1i72367458523dasdztr
 router.get("/:id", function(req, res, next) {
+
   Video.findById(req.params.id)
     .then(video => {
+
       res.json(video);
     })
     .catch(err => {
@@ -45,6 +47,9 @@ router.post("/", (req, res, next) => {
       })
       .then(response => {
         const video = response.data.items[0];
+        console.log(req.user.email);
+        console.log(response.data);
+
         return Video.create({
           owner: req.user._id,
           video_id: id,

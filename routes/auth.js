@@ -1,10 +1,12 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 
-const passport = require('passport');
-const bcrypt = require('bcryptjs');
+const passport = require("passport");
+const bcrypt = require("bcryptjs");
 
-const User = require('../models/user');
+const User = require("../models/user");
+
+const sendEmail = require("../config/sendgrid");
 
 // /api/auth/checkuser
 router.get("/checkuser", (req, res, next) => {
@@ -16,24 +18,26 @@ router.get("/checkuser", (req, res, next) => {
 });
 
 // /api/auth/signup
-router.post('/signup', (req, res, next) => {
+router.post("/signup", (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
 
   if (!email || !password) {
-    res.status(400).json({ message: 'Provide email and password' });
+    res.status(400).json({ message: "Provide email and password" });
     return;
   }
 
   if (password.length < 7) {
-    res.status(400).json({ message: 'Please make your password at least 8 characters long for security reasons.' });
+    res.status(400).json({
+      message:
+        "Please make your password at least 8 characters long for security reasons."
+    });
     return;
   }
 
-  User.findOne({ email }).then((foundUser) => {
-
+  User.findOne({ email }).then(foundUser => {
     if (foundUser) {
-      res.status(400).json({ message: 'Email taken. Choose another one.' });
+      res.status(400).json({ message: "Email taken. Choose another one." });
       return;
     }
 
@@ -45,20 +49,22 @@ router.post('/signup', (req, res, next) => {
       password: hashPass
     });
 
-    aNewUser.save().then((newUser) => {
-      req.login(newUser, (err) => {
+    aNewUser.save().then(newUser => {
+      sendEmail(newUser.email, "Stranger");
+      req.login(newUser, err => {
         res.status(200).json(newUser);
-      })
-    })
-
+      });
+    });
   });
 });
 
 // /api/auth/login
-router.post('/login', (req, res, next) => {
-  passport.authenticate('local', (err, theUser, failureDetails) => {
+router.post("/login", (req, res, next) => {
+  passport.authenticate("local", (err, theUser, failureDetails) => {
     if (err) {
-      res.status(500).json({ message: 'Something went wrong authenticating user' });
+      res
+        .status(500)
+        .json({ message: "Something went wrong authenticating user" });
       return;
     }
 
@@ -70,9 +76,9 @@ router.post('/login', (req, res, next) => {
     }
 
     // save user in session
-    req.login(theUser, (err) => {
+    req.login(theUser, err => {
       if (err) {
-        res.status(500).json({ message: 'Session save went bad.' });
+        res.status(500).json({ message: "Session save went bad." });
         return;
       }
 
@@ -84,9 +90,9 @@ router.post('/login', (req, res, next) => {
 
 // /api/auth/logout
 
-router.get('/logout', function (req, res) {
+router.get("/logout", function(req, res) {
   req.logout();
-  res.json({ message: 'user logged out ' });
+  res.json({ message: "user logged out " });
 });
 
 module.exports = router;
