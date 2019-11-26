@@ -9,10 +9,12 @@ export default class Home extends Component {
     search: "",
     videos: [],
     history: [],
-    isLoading: true
+    isLoading: true,
+    historyIsLoading: true
   };
   componentDidMount() {
     this.getAllVideos();
+    this.getHistoryLatest20();
   }
 
   getAllVideos = () => {
@@ -21,8 +23,10 @@ export default class Home extends Component {
     });
   };
 
-  getHistory = () => {
-    axios.get("api/vn");
+  getHistoryLatest20 = () => {
+    axios.get("/api/history").then(response => {
+      this.setState({ history: response.data, historyIsLoading: false }); // this triggers a re-render
+    });
   };
 
   searchHandler = event => {
@@ -84,7 +88,7 @@ export default class Home extends Component {
         />
         <FeedHistory
           history={this.state.history}
-          isLoading={this.state.isLoading}
+          isLoading={this.state.historyIsLoading}
         />
       </div>
     );

@@ -6,6 +6,8 @@ let History = require("../models/history");
 // GET /api/history/
 router.get("/", function(req, res, next) {
   History.find({})
+    .sort({ updatedAt: -1 })
+    .limit(20)
     .then(response => {
       console.log(response);
       res.json(response);
