@@ -7,7 +7,6 @@ let Video = require("../models/video");
 
 // GET /api/videos
 router.get("/", function(req, res, next) {
-  console.log("/api/videos is called");
   // this gives all the videos in the database as a JSON
   Video.find({})
     .then(videos => {
@@ -21,10 +20,10 @@ router.get("/", function(req, res, next) {
 
 // GET /api/videos/o1i72367458523dasdztr
 router.get("/:id", function(req, res, next) {
-  console.log("single video request GET is called: " + req.params.id);
+
   Video.findById(req.params.id)
     .then(video => {
-      console.log("video: " + video);
+
       res.json(video);
     })
     .catch(err => {
@@ -50,6 +49,7 @@ router.post("/", (req, res, next) => {
         const video = response.data.items[0];
         console.log(req.user.email);
         console.log(response.data);
+
         return Video.create({
           owner: req.user._id,
           video_id: id,
@@ -63,7 +63,7 @@ router.post("/", (req, res, next) => {
         res.json(result);
       })
       .catch(error => {
-        console.log(error)
+        console.log(error);
         res.status(500).json({ message: error.message });
       });
   } else {
