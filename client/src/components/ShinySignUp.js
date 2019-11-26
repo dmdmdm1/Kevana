@@ -47,7 +47,8 @@ const withMyStyles = withStyles(theme => ({
 class ShinySignUp extends React.Component {
   state = {
     email: "",
-    password: ""
+    password: "",
+    error: ""
   };
 
   submitHandler = event => {
@@ -58,7 +59,12 @@ class ShinySignUp extends React.Component {
         this.props.updateUser(response.data);
         this.props.history.push("/");
       })
-      .catch(() => {});
+      .catch(error => {
+        console.log(error.response);
+        this.setState({
+          error: error.response.data.message
+        });
+      });
   };
 
   onEmailChange = event => {
@@ -119,6 +125,7 @@ class ShinySignUp extends React.Component {
                 value={this.state.password}
                 onChange={this.onPasswordChange}
               />
+              <p>{this.state.error}</p>
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
