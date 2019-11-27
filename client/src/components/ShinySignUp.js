@@ -48,7 +48,7 @@ class ShinySignUp extends React.Component {
   state = {
     email: "",
     password: "",
-    error: ""
+    error: null
   };
 
   submitHandler = event => {
@@ -100,6 +100,8 @@ class ShinySignUp extends React.Component {
               noValidate
             >
               <TextField
+                error={this.state.error ? true : false}
+                helperText={this.state.error}
                 variant="outlined"
                 margin="normal"
                 required
