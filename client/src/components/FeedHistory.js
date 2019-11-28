@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 
 class FeedHistory extends React.Component {
   render() {
+
     return (
       <div id="video-list-container">
-        Feed:
+        <h1>Here's what users have been practicing</h1>
         {this.props.isLoading ? <h2>Loading...</h2> : null}
         {!this.props.isLoading && this.props.history.length === 0 ? (
           <h2>no one practiced any videos so far...</h2>

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 import AllVideos from "./AllVideos";
-import { Link, Switch, Route } from "react-router-dom";
 import FeedHistory from "./FeedHistory";
 
 export default class Home extends Component {
