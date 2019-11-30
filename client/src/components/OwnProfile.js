@@ -1,5 +1,5 @@
-import axios from "axios";
 import React, { Component } from "react";
+import ShowProfileData from "./ShowProfileData"
 
 class OwnProfile extends React.Component {
     state = {
@@ -14,6 +14,7 @@ class OwnProfile extends React.Component {
     render() {
       return (
         <div>
+          <ShowProfileData dataToBeShown={this.state.userData} />
           {/* {this.state.userData} */}
           {console.log("this.state.userData._id: "+this.state.userData._id)}
         </div>

@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { Component } from "react";
+import ShowProfileData from "./ShowProfileData"
 
 class SomeProfile extends React.Component {
   state = {
@@ -9,6 +10,7 @@ class SomeProfile extends React.Component {
 
   getProfile = () => {
     axios.get(`/api/profile/${this.props.match.params.id}`).then(response => {
+      console.log(response)
       this.setState({ userData: response.data, isLoading: false }); // this triggers a re-render
     });
   };
@@ -26,6 +28,7 @@ class SomeProfile extends React.Component {
   render() {
     return (
       <div>
+        <ShowProfileData dataToBeShown={this.state.userData} />
         {/* {this.state.userData} */}
         {console.log(this.state.userData)}
       </div>
