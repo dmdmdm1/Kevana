@@ -3,6 +3,7 @@ import axios from "axios";
 import AllVideos from "./AllVideos";
 import { Link, Switch, Route } from "react-router-dom";
 import FeedHistory from "./FeedHistory";
+import Tags from "./Tags";
 
 export default class Home extends Component {
   state = {
@@ -79,6 +80,7 @@ export default class Home extends Component {
           </form>
         </div>
 
+        <Tags />
         <AllVideos
           exact
           path="/"
