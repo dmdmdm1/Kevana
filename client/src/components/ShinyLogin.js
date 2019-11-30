@@ -48,7 +48,7 @@ class ShinyLogin extends React.Component {
   state = {
     email: "",
     password: "",
-    loginError: ""
+    loginError: null
   };
 
   submitHandler = event => {
@@ -103,6 +103,8 @@ class ShinyLogin extends React.Component {
               noValidate
             >
               <TextField
+                error={this.state.loginError ? true : false}
+                helperText={this.state.loginError}
                 variant="outlined"
                 margin="normal"
                 required
@@ -116,6 +118,8 @@ class ShinyLogin extends React.Component {
                 onChange={this.onEmailChange}
               />
               <TextField
+                error={this.state.loginError ? true : false}
+                helperText={this.state.loginError}
                 variant="outlined"
                 margin="normal"
                 required
@@ -128,7 +132,6 @@ class ShinyLogin extends React.Component {
                 value={this.state.password}
                 onChange={this.onPasswordChange}
               />
-              <p>{this.state.loginError}</p>
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"

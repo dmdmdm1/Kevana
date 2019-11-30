@@ -13,7 +13,6 @@ import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import { Link as RouterLink, withRouter } from "react-router-dom";
-//import file from "./signup_unsplash.jpg";
 
 const withMyStyles = withStyles(theme => ({
   root: {
@@ -131,7 +130,6 @@ class ShinySignUp extends React.Component {
                 value={this.state.password}
                 onChange={this.onPasswordChange}
               />
-              {/* <p>{this.state.error}</p> */}
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
