@@ -13,7 +13,6 @@ import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import { Link as RouterLink, withRouter } from "react-router-dom";
-//import file from "./signup_unsplash.jpg";
 
 const withMyStyles = withStyles(theme => ({
   root: {
@@ -47,7 +46,9 @@ const withMyStyles = withStyles(theme => ({
 class ShinySignUp extends React.Component {
   state = {
     email: "",
-    password: ""
+    password: "",
+    emailError: null,
+    passwordError: null
   };
 
   submitHandler = event => {
@@ -58,7 +59,13 @@ class ShinySignUp extends React.Component {
         this.props.updateUser(response.data);
         this.props.history.push("/");
       })
-      .catch(() => {});
+      .catch(error => {
+        console.log("error.response", error.response);
+        this.setState({
+          emailError: error.response.data.emailMessage,
+          passwordError: error.response.data.passwordMessage
+        });
+      });
   };
 
   onEmailChange = event => {
@@ -94,6 +101,8 @@ class ShinySignUp extends React.Component {
               noValidate
             >
               <TextField
+                error={this.state.emailError ? true : false}
+                helperText={this.state.emailError}
                 variant="outlined"
                 margin="normal"
                 required
@@ -107,6 +116,8 @@ class ShinySignUp extends React.Component {
                 onChange={this.onEmailChange}
               />
               <TextField
+                error={this.state.passwordError ? true : false}
+                helperText={this.state.passwordError}
                 variant="outlined"
                 margin="normal"
                 required
