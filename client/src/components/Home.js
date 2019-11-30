@@ -3,7 +3,9 @@ import axios from "axios";
 import AllVideos from "./AllVideos";
 import { Link, Switch, Route } from "react-router-dom";
 import FeedHistory from "./FeedHistory";
-import Tags from "./Tags";
+//import Tags from "./Tags";
+import { Button } from "react-bootstrap";
+import { ButtonToolbar } from "react-bootstrap";
 
 export default class Home extends Component {
   state = {
@@ -80,7 +82,20 @@ export default class Home extends Component {
           </form>
         </div>
 
-        <Tags />
+        <div>
+          length:
+          <ButtonToolbar>
+            <Button variant="outline-primary" size="sm">
+              5 min
+            </Button>
+            <Button variant="dark" size="sm">
+              10 min
+            </Button>
+            <Button variant="secondary" size="sm">
+              15 min
+            </Button>
+          </ButtonToolbar>
+        </div>
         <AllVideos
           exact
           path="/"
