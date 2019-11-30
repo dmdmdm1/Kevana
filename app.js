@@ -12,6 +12,7 @@ var indexRouter = require("./routes/index");
 var authRouter = require("./routes/auth");
 let historyRouter = require("./routes/history");
 let videosRouter = require("./routes/videos");
+let profileRouter = require("./routes/profile");
 
 var app = express();
 
@@ -54,6 +55,7 @@ app.use("/", indexRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/history", historyRouter);
 app.use("/api/videos", videosRouter);
+app.use("/api/profile", profileRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

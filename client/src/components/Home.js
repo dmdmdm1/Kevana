@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 import AllVideos from "./AllVideos";
-import { Link, Switch, Route } from "react-router-dom";
 import FeedHistory from "./FeedHistory";
 
 export default class Home extends Component {
@@ -44,15 +43,6 @@ export default class Home extends Component {
           .includes(this.state.search.toLowerCase());
       })
     });
-
-    // this.state.videos.map(video => {
-    //   if (video.title === this.state.search) {
-    //     console.log("match", video);
-    //     this.setState({
-    //       videos: [...video]
-    //     });
-    //   }
-    // });
   };
 
   render() {
