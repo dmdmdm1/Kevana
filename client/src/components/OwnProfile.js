@@ -3,28 +3,19 @@ import React, { Component } from "react";
 
 class OwnProfile extends React.Component {
     state = {
-      userData: [],
-      isLoading: true
+      userData: []
     };
   
-    getProfile = () => {
-      axios.get(`/api/profile/`).then(response => {
-        console.log("response.data : " + JSON.stringify(response.data));
-        this.setState({ userData: response.data, isLoading: false }); // this triggers a re-render
-      });
-    };
-  
+  // userData is given as props from App.js
     componentDidMount() {
-      this.getProfile();
+      this.setState({ userData: this.props.theLoggedInUser })
     }
-  
-    
   
     render() {
       return (
         <div>
           {/* {this.state.userData} */}
-          {console.log(this.state)}
+          {console.log("this.state.userData._id: "+this.state.userData._id)}
         </div>
       );
     }

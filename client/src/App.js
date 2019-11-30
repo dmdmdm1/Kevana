@@ -10,7 +10,6 @@ import AddVideo from "./components/AddVideo";
 import NavBar from "./components/NavBar";
 import SingleVideo from "./components/SingleVideo";
 
-
 import "./App.css";
 
 class App extends React.Component {
@@ -52,12 +51,29 @@ class App extends React.Component {
       <div>
         <NavBar signOutHandler={this.signOutHandler} />
         <Switch>
-        <Route exact path="/profile" component={OwnProfile} />
-          <Route exact path="/profile/:id" component={SomeProfile} />
+          <Route
+            exact
+            path="/profile"
+            render={props => (
+              <OwnProfile
+                {...props}
+                theLoggedInUser={this.state.loggedInUser}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/profile/:id"
+            render={props => (
+              <SomeProfile
+                {...props}
+                theLoggedInUser={this.state.loggedInUser}
+              />
+            )}
+          />
           <Route exact path="/add-video" component={AddVideo} />
           <Route exact path="/" component={Home} />
           <Route exact path="/videos/:id" component={SingleVideo} />
-
         </Switch>
       </div>
     );
