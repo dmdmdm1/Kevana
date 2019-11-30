@@ -25,6 +25,10 @@ class SomeProfile extends React.Component {
     }
   }
 
+  updateFavoriteStatus(){
+
+  }
+
   render() {
     return (
       <div>
