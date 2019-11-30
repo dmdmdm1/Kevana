@@ -5,6 +5,7 @@ const passport = require("passport");
 const bcrypt = require("bcryptjs");
 
 const User = require("../models/user");
+const sendEmail = require("../config/sendgrid");
 
 // /api/auth/checkuser
 router.get("/checkuser", (req, res, next) => {
@@ -50,6 +51,7 @@ router.post("/signup", (req, res, next) => {
     });
 
     aNewUser.save().then(newUser => {
+      sendEmail(newUser.email, "Stranger");
       req.login(newUser, err => {
         res.status(200).json(newUser);
       });

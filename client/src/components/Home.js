@@ -2,20 +2,30 @@ import React, { Component } from "react";
 import axios from "axios";
 import AllVideos from "./AllVideos";
 import { Link, Switch, Route } from "react-router-dom";
+import FeedHistory from "./FeedHistory";
 
 export default class Home extends Component {
   state = {
     search: "",
     videos: [],
-    isLoading: true
+    history: [],
+    isLoading: true,
+    historyIsLoading: true
   };
   componentDidMount() {
     this.getAllVideos();
+    this.getHistoryLatest20();
   }
 
   getAllVideos = () => {
     axios.get("/api/videos").then(response => {
       this.setState({ videos: response.data, isLoading: false }); // this triggers a re-render
+    });
+  };
+
+  getHistoryLatest20 = () => {
+    axios.get("/api/history").then(response => {
+      this.setState({ history: response.data, historyIsLoading: false }); // this triggers a re-render
     });
   };
 
@@ -46,8 +56,6 @@ export default class Home extends Component {
   };
 
   render() {
-    console.log(this.state.search);
-    console.log(this.state.videos);
     return (
       <div>
         <div className="header">
@@ -71,14 +79,17 @@ export default class Home extends Component {
           </form>
         </div>
 
-          <AllVideos
+        <AllVideos
           exact
-            path="/"
-            videos={this.state.videos}
-            search={this.state.search}
-            isLoading={this.state.isLoading}
-          />
-
+          path="/"
+          videos={this.state.videos}
+          search={this.state.search}
+          isLoading={this.state.isLoading}
+        />
+        <FeedHistory
+          history={this.state.history}
+          isLoading={this.state.historyIsLoading}
+        />
       </div>
     );
   }
