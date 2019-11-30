@@ -48,7 +48,8 @@ class ShinySignUp extends React.Component {
   state = {
     email: "",
     password: "",
-    error: null
+    emailError: null,
+    passwordError: null
   };
 
   submitHandler = event => {
@@ -60,9 +61,10 @@ class ShinySignUp extends React.Component {
         this.props.history.push("/");
       })
       .catch(error => {
-        console.log(error.response);
+        console.log("error.response", error.response);
         this.setState({
-          error: error.response.data.message
+          emailError: error.response.data.emailMessage,
+          passwordError: error.response.data.passwordMessage
         });
       });
   };
@@ -100,8 +102,8 @@ class ShinySignUp extends React.Component {
               noValidate
             >
               <TextField
-                error={this.state.error ? true : false}
-                helperText={this.state.error}
+                error={this.state.emailError ? true : false}
+                helperText={this.state.emailError}
                 variant="outlined"
                 margin="normal"
                 required
@@ -115,6 +117,8 @@ class ShinySignUp extends React.Component {
                 onChange={this.onEmailChange}
               />
               <TextField
+                error={this.state.passwordError ? true : false}
+                helperText={this.state.passwordError}
                 variant="outlined"
                 margin="normal"
                 required
@@ -127,7 +131,7 @@ class ShinySignUp extends React.Component {
                 value={this.state.password}
                 onChange={this.onPasswordChange}
               />
-              <p>{this.state.error}</p>
+              {/* <p>{this.state.error}</p> */}
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
