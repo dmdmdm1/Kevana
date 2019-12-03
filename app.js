@@ -19,7 +19,7 @@ var app = express();
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => {
-    console.log("Connected to Mongo!");
+    console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`);
   })
   .catch(err => {
     console.error("Error connecting to mongo", err);
@@ -48,7 +48,7 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, '/client/build')));
 
 // this needs to be after all the other setup (i.e. the order is important )
 app.use("/", indexRouter);
@@ -71,6 +71,11 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.json({ message: "^/[^error].*+????????????/$" });
+});
+
+app.use((req, res, next) => {
+  // If no routes match, send them the React HTML.
+  res.sendFile(__dirname + "/client/build/index.html");
 });
 
 module.exports = app;
