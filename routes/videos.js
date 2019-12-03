@@ -20,10 +20,8 @@ router.get("/", function(req, res, next) {
 
 // GET /api/videos/o1i72367458523dasdztr
 router.get("/:id", function(req, res, next) {
-
   Video.findById(req.params.id)
     .then(video => {
-
       res.json(video);
     })
     .catch(err => {
@@ -54,7 +52,9 @@ router.post("/", (req, res, next) => {
           link: req.body.videoUrl,
           title: video.snippet.title,
           channel: video.snippet.channelTitle,
-          length: Duration.fromISO(video.contentDetails.duration).as("seconds")
+          length: Duration.fromISO(video.contentDetails.duration).as("seconds"),
+          description: video.snippet.description.substring(0, 140),
+          image: video.snippet.thumbnails.high.url
         });
       })
       .then(result => {
