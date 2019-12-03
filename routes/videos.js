@@ -2,6 +2,7 @@ var express = require("express");
 var axios = require("axios");
 var { Duration } = require("luxon");
 var router = express.Router();
+var urlParse = require("url-parse");
 
 let Video = require("../models/video");
 
@@ -31,10 +32,10 @@ router.get("/:id", function(req, res, next) {
 
 // POST /api/videos
 router.post("/", (req, res, next) => {
-  if (req.body.videoUrl.startsWith("https://www.youtube.com/watch?v=")) {
-    const id = req.body.videoUrl.substr(
-      "https://www.youtube.com/watch?v=".length
-    );
+  const url = urlParse(req.body.videoUrl, true);
+  console.log("url", url);
+  if (url.host === "www.youtube.com" && url.query.v) {
+    const id = url.query.v;
     axios
       .get("https://www.googleapis.com/youtube/v3/videos", {
         params: {
@@ -45,6 +46,7 @@ router.post("/", (req, res, next) => {
       })
       .then(response => {
         const video = response.data.items[0];
+        console.log(video);
 
         return Video.create({
           owner: req.user._id,
