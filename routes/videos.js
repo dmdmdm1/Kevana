@@ -33,9 +33,9 @@ router.get("/:id", function(req, res, next) {
 // POST /api/videos
 router.post("/", (req, res, next) => {
   const url = urlParse(req.body.videoUrl, true);
-  console.log("url", url);
   if (url.host === "www.youtube.com" && url.query.v) {
     const id = url.query.v;
+    console.log("new video id", id);
     axios
       .get("https://www.googleapis.com/youtube/v3/videos", {
         params: {
@@ -46,24 +46,31 @@ router.post("/", (req, res, next) => {
       })
       .then(response => {
         const video = response.data.items[0];
-        console.log(video);
-
-        return Video.create({
-          owner: req.user._id,
-          video_id: id,
-          link: req.body.videoUrl,
-          title: video.snippet.title,
-          channel: video.snippet.channelTitle,
-          length: Duration.fromISO(video.contentDetails.duration).as("seconds"),
-          description: video.snippet.description.substring(0, 140),
-          image: video.snippet.thumbnails.high.url
+        return Video.findOne({ video_id: id }).then(existing => {
+          console.log("secound video", existing);
+          if (existing) {
+            console.log("MIIIIRRR");
+            res.status(403).json({ message: "This video already exists" });
+            return;
+          }
+          return Video.create({
+            owner: req.user._id,
+            video_id: id,
+            link: req.body.videoUrl,
+            title: video.snippet.title,
+            channel: video.snippet.channelTitle,
+            length: Duration.fromISO(video.contentDetails.duration).as(
+              "seconds"
+            ),
+            description: video.snippet.description.substring(0, 140),
+            image: video.snippet.thumbnails.high.url
+          }).then(result => {
+            res.json(result);
+          });
         });
       })
-      .then(result => {
-        res.json(result);
-      })
+
       .catch(error => {
-        console.log(error);
         res.status(500).json({ message: error.message });
       });
   } else {

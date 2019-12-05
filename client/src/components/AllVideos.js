@@ -24,7 +24,6 @@ class AllVideos extends React.Component {
                 </div>
                 <p className="card-text">
                   here is the description: {video.description}.{" "}
-                  <a href="#">#GoPro</a> <a href="#">#GoProHERO6</a>{" "}
                 </p>
                 <Link to={`/videos/${video._id}`}>Watch Video</Link>
               </div>
