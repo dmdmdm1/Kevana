@@ -13,7 +13,10 @@ export default class Home extends Component {
     videos: [],
     history: [],
     isLoading: true,
-    historyIsLoading: true
+    historyIsLoading: true,
+    filter: {},
+    clicked: "outline-primary",
+    notClicked: "secondary"
   };
   componentDidMount() {
     this.getAllVideos();
@@ -38,6 +41,12 @@ export default class Home extends Component {
     });
   };
 
+  setFilter = (filterType, filterValue) => {
+    this.setState({
+      filter: { ...this.state.filter, [filterType]: filterValue }
+    });
+  };
+
   searchButtonHandler = event => {
     event.preventDefault();
     this.setState({
@@ -47,15 +56,6 @@ export default class Home extends Component {
           .includes(this.state.search.toLowerCase());
       })
     });
-
-    // this.state.videos.map(video => {
-    //   if (video.title === this.state.search) {
-    //     console.log("match", video);
-    //     this.setState({
-    //       videos: [...video]
-    //     });
-    //   }
-    // });
   };
 
   render() {
@@ -85,13 +85,35 @@ export default class Home extends Component {
         <div>
           length:
           <ButtonToolbar>
-            <Button variant="outline-primary" size="sm">
+            <Button
+              variant={
+                this.state.filter.length === 600
+                  ? "outline-primary"
+                  : "secondary"
+              }
+              size="sm"
+              onClick={() => {
+                if (this.state.filter.length !== 600) {
+                  this.setFilter("length", 600);
+                } else {
+                  this.setFilter("length", null);
+                }
+              }}
+            >
               5 min
             </Button>
-            <Button variant="dark" size="sm">
+            <Button
+              variant={this.state.clicked ? "outline-primary" : "secondary"}
+              size="sm"
+              onClick={() => this.setFilter("length", 900)}
+            >
               10 min
             </Button>
-            <Button variant="secondary" size="sm">
+            <Button
+              variant={this.state.clicked ? "outline-primary" : "secondary"}
+              size="sm"
+              onClick={() => this.setFilter("length", 1200)}
+            >
               15 min
             </Button>
           </ButtonToolbar>
