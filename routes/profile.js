@@ -22,19 +22,19 @@ router.get("/:id", function(req, res, next) {
 
 // api/profile/follow/fd2z389rh2983z92h3d
 router.put("/follow/:id", (req, res, next) => {
-  const video = req.params.id;
+  const toFollow = req.params.id;
   const user = req.user._id;
   axios.findByIdAndUpdate(user, {
-    $push: { follows: video }
+    $push: { follows: toFollow }
   });
 });
 
 // api/profile/unfollow/fd2z389rh2983z92h3d
 router.put("/unfollow/:id", (req, res, next) => {
-  const video = req.params.id;
+  const toFollow = req.params.id;
   const user = req.user._id;
   axios.findByIdAndUpdate(user, {
-    $pull: { follows: video }
+    $pull: { follows: toFollow }
   });
 });
 

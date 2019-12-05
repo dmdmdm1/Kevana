@@ -49,6 +49,8 @@ class App extends React.Component {
 
     return (
       <div>
+        {console.log("this.state.loggedInUser.favorites in app,js: " + this.state.loggedInUser.favorites)}
+        {console.log("type of this.state.loggedInUser.favorites in app,js: " + typeof this.state.loggedInUser.favorites)}
         <NavBar signOutHandler={this.signOutHandler} />
         <Switch>
           <Route
