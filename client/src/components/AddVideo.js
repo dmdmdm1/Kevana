@@ -27,13 +27,19 @@ const withMyStyles = withStyles(theme => ({
 class AddVideo extends Component {
   state = {
     videoUrl: "",
+    bodyParts: "",
+    difficultyLevel: "",
     creationError: null
   };
 
   onVideoCreation = event => {
     event.preventDefault();
     axios
-      .post("/api/videos", { videoUrl: this.state.videoUrl })
+      .post("/api/videos", {
+        videoUrl: this.state.videoUrl,
+        bodyParts: this.state.bodyParts,
+        difficultyLevel: this.state.difficultyLevel
+      })
       .then(response => {
         this.props.history.push(`videos/${response.data._id}`); // go to created video
       })
@@ -59,6 +65,13 @@ class AddVideo extends Component {
     this.setState({ videoUrl: event.target.value });
   };
 
+  onbodyPartsChange = event => {
+    this.setState({ bodyParts: event.target.value });
+  };
+
+  ondifficultyLevelChange = event => {
+    this.setState({ difficultyLevel: event.target.value });
+  };
   render() {
     return (
       <form className="{classes.container}" noValidate autoComplete="off">
@@ -71,11 +84,36 @@ class AddVideo extends Component {
             required
             margin="normal"
             name="video-url"
-            label="video-url"
+            label="Video URL"
             id="standard-required"
-            label="Video url"
             onChange={this.onVideoUrlChange}
             value={this.state.videoUrl}
+          />
+          <TextField
+            error={this.state.creationError ? true : false}
+            helperText={this.state.creationError}
+            variant="outlined"
+            fullWidth
+            required
+            margin="normal"
+            name="body-parts"
+            id="standard-required"
+            label="Body Parts"
+            onChange={this.onbodyPartsChange}
+            value={this.state.bodyParts}
+          />
+          <TextField
+            error={this.state.creationError ? true : false}
+            helperText={this.state.creationError}
+            variant="outlined"
+            fullWidth
+            required
+            margin="normal"
+            name="difficulty-level"
+            id="standard-required"
+            label="Difficulty Level"
+            onChange={this.ondifficultyLevelChange}
+            value={this.state.difficultyLevel}
           />
           <Button
             variant="contained"
