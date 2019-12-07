@@ -72,3 +72,14 @@ h1 {
   background: #ffc107;
   cursor: pointer;
 }
+.buttonSpaceIsBetter {
+  margin-left: 10px;
+}
+.buttonsWrapper {
+  margin-top: 10px;
+}
+.length {
+  margin: 0;
+  position: relative;
+  top: 3px;
+}

@@ -92,19 +92,21 @@ export default class Home extends Component {
           </form>
         </div>
 
-        <div>
-          length:
+        <div className="buttonsWrapper">
           <ButtonToolbar>
+            <p className="length">length:</p>
             <Button
               variant={
-                this.state.filter.length === 300 ? "info" : "outline-info"
+                this.state.filter.length === 300
+                  ? "info buttonSpaceIsBetter"
+                  : "outline-info buttonSpaceIsBetter"
               }
               size="sm"
               onClick={() => {
                 if (this.state.filter.length !== 300) {
-                  this.setFilter("length", 300);
+                  this.setFilter("length buttonSpaceIsBetter", 300);
                 } else {
-                  this.setFilter("length", null);
+                  this.setFilter("length buttonSpaceIsBetter", null);
                 }
               }}
             >
@@ -112,7 +114,9 @@ export default class Home extends Component {
             </Button>
             <Button
               variant={
-                this.state.filter.length === 600 ? "info" : "outline-info"
+                this.state.filter.length === 600
+                  ? "info buttonSpaceIsBetter"
+                  : "outline-info buttonSpaceIsBetter"
               }
               size="sm"
               onClick={() => {
@@ -127,7 +131,9 @@ export default class Home extends Component {
             </Button>
             <Button
               variant={
-                this.state.filter.length === 900 ? "info" : "outline-info"
+                this.state.filter.length === 900
+                  ? "info buttonSpaceIsBetter"
+                  : "outline-info buttonSpaceIsBetter"
               }
               size="sm"
               onClick={() => {
