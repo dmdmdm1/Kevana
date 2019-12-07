@@ -9,7 +9,9 @@ const videoSchema = new Schema({
   channel: String,
   length: Number,
   difficulty_level: String,
-  bodyparts: Array
+  bodyparts: Array,
+  description: String,
+  image: String
 });
 
 const Video = mongoose.model("Video", videoSchema);

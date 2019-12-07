@@ -47,7 +47,8 @@ const withMyStyles = withStyles(theme => ({
 class ShinyLogin extends React.Component {
   state = {
     email: "",
-    password: ""
+    password: "",
+    loginError: null
   };
 
   submitHandler = event => {
@@ -56,9 +57,14 @@ class ShinyLogin extends React.Component {
     axios
       .post("/api/auth/login", this.state)
       .then(response => {
+        console.log(response);
         this.props.updateUser(response.data);
       })
-      .catch(error => console.log("login page, something went wrong", error));
+      .catch(error => {
+        this.setState({
+          loginError: "Email or Password are Wrong"
+        });
+      });
   };
 
   onEmailChange = event => {
@@ -75,7 +81,6 @@ class ShinyLogin extends React.Component {
 
   render() {
     const classes = this.props.classes;
-    // console.log("hey props", this.props.updateUser)
 
     return (
       <Grid container component="main" className={classes.root}>
@@ -95,6 +100,8 @@ class ShinyLogin extends React.Component {
               noValidate
             >
               <TextField
+                error={this.state.loginError ? true : false}
+                helperText={this.state.loginError}
                 variant="outlined"
                 margin="normal"
                 required
@@ -108,6 +115,8 @@ class ShinyLogin extends React.Component {
                 onChange={this.onEmailChange}
               />
               <TextField
+                error={this.state.loginError ? true : false}
+                helperText={this.state.loginError}
                 variant="outlined"
                 margin="normal"
                 required

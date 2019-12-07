@@ -12,13 +12,14 @@ var indexRouter = require("./routes/index");
 var authRouter = require("./routes/auth");
 let historyRouter = require("./routes/history");
 let videosRouter = require("./routes/videos");
+let profileRouter = require("./routes/profile");
 
 var app = express();
 
 mongoose
   .connect(process.env.MONGODB_URI)
-  .then(() => {
-    console.log("Connected to Mongo!");
+  .then(x => {
+    console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`);
   })
   .catch(err => {
     console.error("Error connecting to mongo", err);
@@ -47,16 +48,17 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, '/client/build')));
 
 // this needs to be after all the other setup (i.e. the order is important )
 app.use("/", indexRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/history", historyRouter);
 app.use("/api/videos", videosRouter);
+app.use("/api/profile", profileRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use("/api", function(req, res, next) {
   next(createError(404));
 });
 
@@ -69,6 +71,11 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.json({ message: "^/[^error].*+????????????/$" });
+});
+
+app.use((req, res, next) => {
+  // If no routes match, send them the React HTML.
+  res.sendFile(__dirname + "/client/build/index.html");
 });
 
 module.exports = app;

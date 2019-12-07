@@ -5,7 +5,6 @@ const passport = require("passport");
 const bcrypt = require("bcryptjs");
 
 const User = require("../models/user");
-
 const sendEmail = require("../config/sendgrid");
 
 // /api/auth/checkuser
@@ -29,7 +28,7 @@ router.post("/signup", (req, res, next) => {
 
   if (password.length < 7) {
     res.status(400).json({
-      message:
+      passwordMessage:
         "Please make your password at least 8 characters long for security reasons."
     });
     return;
@@ -37,7 +36,9 @@ router.post("/signup", (req, res, next) => {
 
   User.findOne({ email }).then(foundUser => {
     if (foundUser) {
-      res.status(400).json({ message: "Email taken. Choose another one." });
+      res.status(400).json({
+        emailMessage: "Email taken. Choose another one."
+      });
       return;
     }
 

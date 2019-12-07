@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
-import ProjectList from "./components/ProjectList";
+import SomeProfile from "./components/SomeProfile";
+import OwnProfile from "./components/OwnProfile";
 import ShinySignUp from "./components/ShinySignUp";
 import { withRouter, Switch, Route } from "react-router-dom";
 import ShinyLogin from "./components/ShinyLogin";
@@ -8,7 +9,6 @@ import Home from "./components/Home";
 import AddVideo from "./components/AddVideo";
 import NavBar from "./components/NavBar";
 import SingleVideo from "./components/SingleVideo";
-
 
 import "./App.css";
 
@@ -51,12 +51,29 @@ class App extends React.Component {
       <div>
         <NavBar signOutHandler={this.signOutHandler} />
         <Switch>
-          <Route exact path="/profile" component={ProjectList} />
-          <Route exact path="/profile" render={ProjectList} />
+          <Route
+            exact
+            path="/profile"
+            render={props => (
+              <OwnProfile
+                {...props}
+                theLoggedInUser={this.state.loggedInUser}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/profile/:id"
+            render={props => (
+              <SomeProfile
+                {...props}
+                theLoggedInUser={this.state.loggedInUser}
+              />
+            )}
+          />
           <Route exact path="/add-video" component={AddVideo} />
           <Route exact path="/" component={Home} />
           <Route exact path="/videos/:id" component={SingleVideo} />
-
         </Switch>
       </div>
     );

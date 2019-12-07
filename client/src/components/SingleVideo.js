@@ -11,7 +11,6 @@ class SingleVideo extends React.Component {
 
   getSingleVideo = () => {
     axios.get(`/api/videos/${this.props.match.params.id}`).then(response => {
-      console.log("response.data : " + JSON.stringify(response.data));
       this.setState({ video: response.data, isLoading: false }); // this triggers a re-render
     });
   };

@@ -2,6 +2,7 @@ var express = require("express");
 var axios = require("axios");
 var { Duration } = require("luxon");
 var router = express.Router();
+var urlParse = require("url-parse");
 
 let Video = require("../models/video");
 
@@ -20,10 +21,8 @@ router.get("/", function(req, res, next) {
 
 // GET /api/videos/o1i72367458523dasdztr
 router.get("/:id", function(req, res, next) {
-
   Video.findById(req.params.id)
     .then(video => {
-
       res.json(video);
     })
     .catch(err => {
@@ -33,10 +32,10 @@ router.get("/:id", function(req, res, next) {
 
 // POST /api/videos
 router.post("/", (req, res, next) => {
-  if (req.body.videoUrl.startsWith("https://www.youtube.com/watch?v=")) {
-    const id = req.body.videoUrl.substr(
-      "https://www.youtube.com/watch?v=".length
-    );
+  const url = urlParse(req.body.videoUrl, true);
+  if (url.host === "www.youtube.com" && url.query.v) {
+    const id = url.query.v;
+    console.log("new video id", id);
     axios
       .get("https://www.googleapis.com/youtube/v3/videos", {
         params: {
@@ -47,23 +46,31 @@ router.post("/", (req, res, next) => {
       })
       .then(response => {
         const video = response.data.items[0];
-        console.log(req.user.email);
-        console.log(response.data);
-
-        return Video.create({
-          owner: req.user._id,
-          video_id: id,
-          link: req.body.videoUrl,
-          title: video.snippet.title,
-          channel: video.snippet.channelTitle,
-          length: Duration.fromISO(video.contentDetails.duration).as("seconds")
+        return Video.findOne({ video_id: id }).then(existing => {
+          console.log("secound video", existing);
+          if (existing) {
+            console.log("MIIIIRRR");
+            res.status(403).json({ message: "This video already exists" });
+            return;
+          }
+          return Video.create({
+            owner: req.user._id,
+            video_id: id,
+            link: req.body.videoUrl,
+            title: video.snippet.title,
+            channel: video.snippet.channelTitle,
+            length: Duration.fromISO(video.contentDetails.duration).as(
+              "seconds"
+            ),
+            description: video.snippet.description.substring(0, 140),
+            image: video.snippet.thumbnails.high.url
+          }).then(result => {
+            res.json(result);
+          });
         });
       })
-      .then(result => {
-        res.json(result);
-      })
+
       .catch(error => {
-        console.log(error);
         res.status(500).json({ message: error.message });
       });
   } else {
