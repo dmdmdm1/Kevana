@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { Component } from "react";
+import React from "react";
 import ShowProfileData from "./ShowProfileData";
 
 class SomeProfile extends React.Component {
@@ -46,7 +46,7 @@ class SomeProfile extends React.Component {
   };
 
   render() {
-    if (this.state.profileData.length == 0) {
+    if (this.state.profileData.length === 0) {
       return <h1>Loading.....</h1>;
     }
     return (

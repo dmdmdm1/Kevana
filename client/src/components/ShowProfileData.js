@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 
 function ShowProfileData(props) {
   const { userName, favorites, follows, email } = props.dataToBeShown;
@@ -13,7 +14,16 @@ function ShowProfileData(props) {
       )}
       Follows these users:{" "}
       {follows.length ? (
-        <p>this user is following people!!!</p>
+        <div>
+          this user is following people!!!
+          {follows.map(followedUsers => (
+            <div key={followedUsers}>
+              <Link to={`/profile/${followedUsers}`}>
+                link to the user{" "}
+              </Link>
+            </div>
+          ))}
+        </div>
       ) : (
         <p>not following anyone ... YET!!!!!11</p>
       )}

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import ShowProfileData from "./ShowProfileData"
 
 class OwnProfile extends React.Component {

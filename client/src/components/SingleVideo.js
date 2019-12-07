@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { Component } from "react";
+import React from "react";
 import ReactPlayer from "react-player";
 import { Link } from "react-router-dom";
 
@@ -47,15 +47,6 @@ class SingleVideo extends React.Component {
           I practiced this video
         </button>
         <Link to={`/`}>Back to all videos </Link>
-
-        {/* <div id="video-list-container">
-            <h1>Yoga Videos from our database</h1>
-            {this.state.isLoading ? <h2>Loading...</h2> : null}
-            {(!this.state.isLoading && this.state.videos.length === 0) ? <h2>no videos so far...</h2> : null}
-            {this.state.videos.map(video =>
-              <div key={video._id}>Title: {video.title} -- video_id: {video.video_id} </div>
-            )}
-          </div > */}
       </div>
     );
   }
