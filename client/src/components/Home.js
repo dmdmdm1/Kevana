@@ -14,9 +14,7 @@ export default class Home extends Component {
     history: [],
     isLoading: true,
     historyIsLoading: true,
-    filter: {},
-    clicked: "outline-primary",
-    notClicked: "secondary"
+    filter: {}
   };
   componentDidMount() {
     this.getAllVideos();
@@ -125,9 +123,6 @@ export default class Home extends Component {
                   this.setFilter("length", null);
                 }
               }}
-              //   variant={this.state.clicked ? "outline-primary" : "secondary"}
-              //   size="sm"
-              //   onClick={() => this.setFilter("length", 900)}
             >
               10 min
             </Button>
@@ -143,9 +138,6 @@ export default class Home extends Component {
                   this.setFilter("length", null);
                 }
               }}
-              //   variant={this.state.clicked ? "outline-primary" : "secondary"}
-              //   size="sm"
-              //   onClick={() => this.setFilter("length", 1200)}
             >
               15 min
             </Button>
