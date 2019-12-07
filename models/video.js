@@ -11,7 +11,8 @@ const videoSchema = new Schema({
   difficulty_level: String,
   bodyparts: Array,
   description: String,
-  image: String
+  image: String,
+  tags: Array
 });
 
 const Video = mongoose.model("Video", videoSchema);

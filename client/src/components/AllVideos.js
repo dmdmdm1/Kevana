@@ -12,25 +12,26 @@ class AllVideos extends React.Component {
             <h2>no videos so far...</h2>
           ) : null}
           {this.props.videos.map(video => {
-            console.log(video);
             return (
-              <LazyLoad height={700}>
-                <div className="video">
-                  <img
-                    alt="Card cap"
-                    className="card-img-top"
-                    src={video.image}
-                  ></img>
-                  <div key={video._id} className="card-body">
-                    <h4 className="card-title">{video.title}</h4>
+              <div key={video._id}>
+                <LazyLoad height={700}>
+                  <div className="video">
+                    <img
+                      alt="Card cap"
+                      className="card-img-top"
+                      src={video.image}
+                    ></img>
+                    <div className="card-body">
+                      <h4 className="card-title">{video.title}</h4>
+                    </div>
+                    <p className="card-text">
+                      here is the description: {video.description}.{" "}
+                    </p>
+                    <Link to={`/videos/${video._id}`}>Watch Video</Link>
                   </div>
-                  <p className="card-text">
-                    here is the description: {video.description}.{" "}
-                    <a href="#">#GoPro</a> <a href="#">#GoProHERO6</a>{" "}
-                  </p>
-                  <Link to={`/videos/${video._id}`}>Watch Video</Link>
-                </div>
-              </LazyLoad>
+                </LazyLoad>
+                );
+              </div>
             );
           })}
         </div>

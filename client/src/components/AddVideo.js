@@ -39,9 +39,13 @@ class AddVideo extends Component {
       })
       .catch(error => {
         console.log("hi", error);
-        if (error.response.status === 403) {
+        if (error.response.status === 409) {
           this.setState({
-            creationError: "The Video already exists"
+            creationError: error.response.data.message
+          });
+        } else if (error.response.status === 422) {
+          this.setState({
+            creationError: error.response.data.message
           });
         } else {
           this.setState({
@@ -60,7 +64,7 @@ class AddVideo extends Component {
       <form className="{classes.container}" noValidate autoComplete="off">
         <div>
           <TextField
-            creationError={this.state.creationError ? true : false}
+            error={this.state.creationError ? true : false}
             helperText={this.state.creationError}
             variant="outlined"
             fullWidth
