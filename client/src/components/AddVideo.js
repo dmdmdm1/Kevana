@@ -39,15 +39,17 @@ const withMyStyles = withStyles(theme => ({
     margin: theme.spacing(3, 0, 2)
   }
 }));
-const error = BODY_PARTS.filter(v => v).length < 1;
 
 class AddVideo extends Component {
   state = {
     videoUrl: "",
     bodyParts: [],
     difficultyLevel: "",
-    creationError: null
+    creationError: null,
+    bodyPartsError: null
   };
+
+  //  error = this.state.bodyParts.filter(v => v).length < 1;
 
   onVideoCreation = event => {
     event.preventDefault();
@@ -61,7 +63,7 @@ class AddVideo extends Component {
         this.props.history.push(`videos/${response.data._id}`); // go to created video
       })
       .catch(error => {
-        console.log("hi", error);
+        console.log(error.response.data.error);
         if (error.response.status === 409) {
           this.setState({
             creationError: error.response.data.message
@@ -69,6 +71,10 @@ class AddVideo extends Component {
         } else if (error.response.status === 422) {
           this.setState({
             creationError: error.response.data.message
+          });
+        } else if (error.response.status === 400) {
+          this.setState({
+            bodyPartsError: error.response.data.error
           });
         } else {
           this.setState({
@@ -117,7 +123,11 @@ class AddVideo extends Component {
             value={this.state.videoUrl}
           />
           <FormLabel component="legend">Pick the targeted body parts</FormLabel>
-          <FormControl required error={error} component="fieldset">
+          <FormControl
+            required
+            error={this.state.bodyPartsError ? true : false}
+            component="fieldset"
+          >
             {BODY_PARTS.map(bodyPart => (
               <FormGroup row>
                 <FormControlLabel
@@ -133,7 +143,7 @@ class AddVideo extends Component {
               </FormGroup>
             ))}
           </FormControl>
-          <FormHelperText></FormHelperText>
+          <FormHelperText>{this.state.bodyPartsError}</FormHelperText>
           <TextField
             error={this.state.creationError ? true : false}
             helperText={this.state.creationError}
