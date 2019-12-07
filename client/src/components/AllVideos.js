@@ -30,7 +30,6 @@ class AllVideos extends React.Component {
                     <Link to={`/videos/${video._id}`}>Watch Video</Link>
                   </div>
                 </LazyLoad>
-                );
               </div>
             );
           })}

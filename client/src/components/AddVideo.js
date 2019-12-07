@@ -9,6 +9,7 @@ import FormGroup from "@material-ui/core/FormGroup";
 import FormLabel from "@material-ui/core/FormLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormHelperText from "@material-ui/core/FormHelperText";
+import DifficultyLevel from "./DifficultyLevel";
 
 const BODY_PARTS = [
   "mind",
@@ -129,7 +130,7 @@ class AddVideo extends Component {
             component="fieldset"
           >
             {BODY_PARTS.map(bodyPart => (
-              <FormGroup row>
+              <FormGroup row key={BODY_PARTS.indexOf(bodyPart)}>
                 <FormControlLabel
                   control={
                     <Checkbox
@@ -144,19 +145,7 @@ class AddVideo extends Component {
             ))}
           </FormControl>
           <FormHelperText>{this.state.bodyPartsError}</FormHelperText>
-          <TextField
-            error={this.state.creationError ? true : false}
-            helperText={this.state.creationError}
-            variant="outlined"
-            fullWidth
-            required
-            margin="normal"
-            name="difficulty-level"
-            id="standard-required"
-            label="Difficulty Level"
-            onChange={this.onDifficultyLevelChange}
-            value={this.state.difficultyLevel}
-          />
+          <DifficultyLevel />
           <Button
             variant="contained"
             color="primary"
