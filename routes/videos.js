@@ -82,7 +82,9 @@ router.post("/", (req, res, next) => {
         channel: video.snippet.channelTitle,
         length: Duration.fromISO(video.contentDetails.duration).as("seconds"),
         description: video.snippet.description.substring(0, 140),
-        image: video.snippet.thumbnails.high.url
+        image: video.snippet.thumbnails.high.url,
+        difficultyLevel: req.body.difficultyLevel,
+        bodyParts: req.body.bodyParts
       });
     })
     .then(result => {
@@ -90,11 +92,9 @@ router.post("/", (req, res, next) => {
     })
     .catch(error => {
       console.error(error);
-      res
-        .status(500)
-        .json({
-          message: "There was an error if you know a dev check your console"
-        });
+      res.status(500).json({
+        message: "There was an error if you know a dev check your console"
+      });
     });
 });
 
