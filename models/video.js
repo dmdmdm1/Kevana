@@ -7,7 +7,9 @@ const videoSchema = new Schema({
   link: String,
   title: String,
   channel: String,
-  length: Number
+  length: Number,
+  difficulty_level: String,
+  bodyparts: Array
 });
 
 const Video = mongoose.model("Video", videoSchema);
