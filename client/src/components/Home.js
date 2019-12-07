@@ -25,6 +25,7 @@ export default class Home extends Component {
 
   getAllVideos = () => {
     axios.get("/api/videos").then(response => {
+      console.log("response", response);
       this.setState({ videos: response.data, isLoading: false }); // this triggers a re-render
     });
   };
@@ -59,6 +60,18 @@ export default class Home extends Component {
   };
 
   render() {
+    console.log(this.state.videos);
+    const videos = this.state.videos.filter(video => {
+      if (this.state.filter.length) {
+        if (
+          this.state.filter.length + 180 <= video.length ||
+          this.state.filter.length - 180 >= video.length
+        ) {
+          return false;
+        }
+      }
+      return true;
+    });
     return (
       <div>
         <div className="header">
@@ -87,9 +100,22 @@ export default class Home extends Component {
           <ButtonToolbar>
             <Button
               variant={
-                this.state.filter.length === 600
-                  ? "outline-primary"
-                  : "secondary"
+                this.state.filter.length === 300 ? "info" : "outline-info"
+              }
+              size="sm"
+              onClick={() => {
+                if (this.state.filter.length !== 300) {
+                  this.setFilter("length", 300);
+                } else {
+                  this.setFilter("length", null);
+                }
+              }}
+            >
+              5 min
+            </Button>
+            <Button
+              variant={
+                this.state.filter.length === 600 ? "info" : "outline-info"
               }
               size="sm"
               onClick={() => {
@@ -99,20 +125,27 @@ export default class Home extends Component {
                   this.setFilter("length", null);
                 }
               }}
-            >
-              5 min
-            </Button>
-            <Button
-              variant={this.state.clicked ? "outline-primary" : "secondary"}
-              size="sm"
-              onClick={() => this.setFilter("length", 900)}
+              //   variant={this.state.clicked ? "outline-primary" : "secondary"}
+              //   size="sm"
+              //   onClick={() => this.setFilter("length", 900)}
             >
               10 min
             </Button>
             <Button
-              variant={this.state.clicked ? "outline-primary" : "secondary"}
+              variant={
+                this.state.filter.length === 900 ? "info" : "outline-info"
+              }
               size="sm"
-              onClick={() => this.setFilter("length", 1200)}
+              onClick={() => {
+                if (this.state.filter.length !== 900) {
+                  this.setFilter("length", 900);
+                } else {
+                  this.setFilter("length", null);
+                }
+              }}
+              //   variant={this.state.clicked ? "outline-primary" : "secondary"}
+              //   size="sm"
+              //   onClick={() => this.setFilter("length", 1200)}
             >
               15 min
             </Button>
@@ -121,7 +154,7 @@ export default class Home extends Component {
         <AllVideos
           exact
           path="/"
-          videos={this.state.videos}
+          videos={videos}
           search={this.state.search}
           isLoading={this.state.isLoading}
         />
