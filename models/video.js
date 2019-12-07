@@ -9,7 +9,8 @@ const videoSchema = new Schema({
   channel: String,
   length: Number,
   description: String,
-  image: String
+  image: String,
+  tags: Array
 });
 
 const Video = mongoose.model("Video", videoSchema);
