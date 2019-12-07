@@ -61,7 +61,6 @@ class ShinyLogin extends React.Component {
         this.props.updateUser(response.data);
       })
       .catch(error => {
-        console.log("loggedIn is wrong", error);
         this.setState({
           loginError: "Email or Password are Wrong"
         });
@@ -82,8 +81,6 @@ class ShinyLogin extends React.Component {
 
   render() {
     const classes = this.props.classes;
-    // console.log("hey props", this.props.updateUser)
-    console.log(this.state.loginError);
 
     return (
       <Grid container component="main" className={classes.root}>
