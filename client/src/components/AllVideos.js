@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import LazyLoad from "react-lazyload";
 
 class AllVideos extends React.Component {
   render() {
@@ -13,20 +14,22 @@ class AllVideos extends React.Component {
           {this.props.videos.map(video => {
             return (
               <div key={video._id}>
-                <div className="video">
-                  <img
-                    alt="Card cap"
-                    className="card-img-top"
-                    src={video.image}
-                  ></img>
-                  <div className="card-body">
-                    <h4 className="card-title">{video.title}</h4>
+                <LazyLoad height={700}>
+                  <div className="video">
+                    <img
+                      alt="Card cap"
+                      className="card-img-top"
+                      src={video.image}
+                    ></img>
+                    <div className="card-body">
+                      <h4 className="card-title">{video.title}</h4>
+                    </div>
+                    <p className="card-text">
+                      here is the description: {video.description}.{" "}
+                    </p>
+                    <Link to={`/videos/${video._id}`}>Watch Video</Link>
                   </div>
-                  <p className="card-text">
-                    here is the description: {video.description}.{" "}
-                  </p>
-                  <Link to={`/videos/${video._id}`}>Watch Video</Link>
-                </div>
+                </LazyLoad>
                 );
               </div>
             );
