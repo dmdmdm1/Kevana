@@ -6,16 +6,14 @@ class SomeProfile extends React.Component {
   state = {
     profileData: [],
     isLoading: true,
-    isFollowing: false // hier holt sich der button die Info
+    isFollowed: true
   };
 
   getProfile = () => {
     axios.get(`/api/profile/${this.props.match.params.id}`).then(response => {
       this.setState({ profileData: response.data, isLoading: false }); // this triggers a re-render
     });
-    // this.state.profileData.follows.includes(this.props.theLoggedInUser._id) ? this.setState({isFollowing: true}) : this.setState({isFollowing: false})
   };
-  
 
   // if user is trying to look at her own profile, she is redirected to /profile
   // otherwise axios request for profile data is made
@@ -27,31 +25,47 @@ class SomeProfile extends React.Component {
     }
   }
 
-  // funktion um follow/unfollow ans backend zu senden
-  // und dann den state updaten
-  changeFollowStatus(){ 
-    this.state.isFollowing ? ()
-
-    :
-    // this.state.isFollowing ? 
-    // this.setState({isFollowing: false})
-
-  }
-
+  changeFollowStatus = () => {
+    if (
+      this.props.theLoggedInUser.follows.includes(this.props.match.params.id)
+    ) {
+      axios
+        .put(`/api/profile/unfollow/${this.props.match.params.id}`)
+        .then(response => {
+          this.props.updateUser(response.data);
+        })
+        .catch(err => console.log("something went Wrong ", err));
+    } else {
+      axios
+        .put(`/api/profile/follow/${this.props.match.params.id}`)
+        .then(response => {
+          this.props.updateUser(response.data);
+        })
+        .catch(err => console.log("something went Wrong ", err));
+    }
+  };
 
   render() {
+    if (this.state.profileData.length == 0) {
+      return <h1>Loading.....</h1>;
+    }
     return (
       <div>
         {this.state.isLoading ? (
           <p>loading...</p>
         ) : (
-          <ShowProfileData dataToBeShown={this.state.profileData} />
-          // stand in for a follow button
+          <div>
+            <ShowProfileData dataToBeShown={this.state.profileData} />
+            <button type="button" onClick={this.changeFollowStatus}>
+              {/* {this.props.theLoggedInUser.follows.includes(this.state.profileData.userId_) ? "unfollow" : "follow"} */}
+              {this.props.theLoggedInUser.follows.includes(
+                this.props.match.params.id
+              )
+                ? "unFollow"
+                : "follow"}
+            </button>
+          </div>
         )}
-
-        <button type="button" onClick={this.changeFollowStatus}>{this.state.isFollowing ? "unfollow" : "follow"}</button>
-        {/* {this.state.userData} */}
-        {console.log(this.state.userData)}
       </div>
     );
   }

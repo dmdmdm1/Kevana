@@ -22,19 +22,32 @@ router.get("/:id", function(req, res, next) {
 
 // api/profile/follow/fd2z389rh2983z92h3d
 router.put("/follow/:id", (req, res, next) => {
-  const toFollow = req.params.id;
-  const user = req.user._id;
-  axios.findByIdAndUpdate(user, {
-    $push: { follows: toFollow }
+  // finds user (req.user._id) and adds the other user (req.params.id) from the follows-array
+  User.findByIdAndUpdate(req.user._id, {
+    $addToSet: { follows: req.params.id }
+  },
+  { new: true })
+  .then(user => {
+    res.json(user);
+  })
+  .catch(err => {
+    console.log("error while updating for the profile: " + err);
+    res.json(err);
   });
 });
 
 // api/profile/unfollow/fd2z389rh2983z92h3d
 router.put("/unfollow/:id", (req, res, next) => {
-  const toFollow = req.params.id;
-  const user = req.user._id;
-  axios.findByIdAndUpdate(user, {
-    $pull: { follows: toFollow }
+  User.findByIdAndUpdate(req.user._id, {
+    $pull: { follows: req.params.id }
+  },
+  { new: true })
+  .then(user => {
+    res.json(user);
+  })
+  .catch(err => {
+    console.log("error while updating for the profile");
+    res.json(err);
   });
 });
 
