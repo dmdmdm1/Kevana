@@ -10,6 +10,7 @@
     "nodemon": "^1.19.4",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
+    "react-lazyload": "^2.6.5",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0"
   },
