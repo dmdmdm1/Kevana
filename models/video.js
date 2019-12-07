@@ -8,6 +8,8 @@ const videoSchema = new Schema({
   title: String,
   channel: String,
   length: Number,
+  difficulty_level: String,
+  bodyparts: Array,
   description: String,
   image: String
 });
