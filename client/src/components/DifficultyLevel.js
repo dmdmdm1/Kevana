@@ -16,32 +16,21 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function DifficultyLevel() {
+export default function DifficultyLevel(props) {
+  console.log("props", props);
   const classes = useStyles();
-  const [difficultyLevel, setDifficultylevel] = React.useState("");
-
-  const inputLabel = React.useRef(null);
-  const [labelWidth, setLabelWidth] = React.useState(0);
-
-  const handleChange = event => {
-    setDifficultylevel(event.target.value);
-  };
-
   return (
     <div>
       <FormControl className={classes.formControl}>
         <InputLabel id="demo-simple-select-helper-label">
-          DifficultyLevel
+          Difficulty Level
         </InputLabel>
         <Select
           labelId="demo-simple-select-helper-label"
           id="demo-simple-select-helper"
-          value={difficultyLevel}
-          onChange={handleChange}
+          onChange={props.onDifficultyLevelChange}
+          //should there be a value defined here?
         >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
           <MenuItem value={"Beginner"}>Beginner</MenuItem>
           <MenuItem value={"Intermediate"}>Intermediate</MenuItem>
           <MenuItem value={"Advanced"}>Advanced</MenuItem>
