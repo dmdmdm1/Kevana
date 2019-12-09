@@ -64,7 +64,6 @@ class AddVideo extends Component {
         this.props.history.push(`videos/${response.data._id}`); // go to created video
       })
       .catch(error => {
-        console.log(error.response.data.error);
         if (error.response.status === 409) {
           this.setState({
             creationError: error.response.data.message

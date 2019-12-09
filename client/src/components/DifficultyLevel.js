@@ -17,7 +17,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function DifficultyLevel(props) {
-  console.log("props", props);
   const classes = useStyles();
   return (
     <div>
