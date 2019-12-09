@@ -45,7 +45,7 @@ class AddVideo extends Component {
   state = {
     videoUrl: "",
     bodyParts: [],
-    difficultyLevel: "", // how to pass this back and forth with DifficultyLevel. props?
+    difficultyLevel: "",
     creationError: null,
     bodyPartsError: null
   };
@@ -149,6 +149,7 @@ class AddVideo extends Component {
           </FormControl>
           <FormHelperText>{this.state.bodyPartsError}</FormHelperText>
           <DifficultyLevel
+            initialDifficulty={this.state.difficultyLevel}
             onDifficultyLevelChange={this.onDifficultyLevelChange}
           />
           <Button

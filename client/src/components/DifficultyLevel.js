@@ -29,7 +29,7 @@ export default function DifficultyLevel(props) {
           labelId="demo-simple-select-helper-label"
           id="demo-simple-select-helper"
           onChange={props.onDifficultyLevelChange}
-          //should there be a value defined here?
+          value={props.initialDifficulty}
         >
           <MenuItem value={"Beginner"}>Beginner</MenuItem>
           <MenuItem value={"Intermediate"}>Intermediate</MenuItem>
