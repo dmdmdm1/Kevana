@@ -1,21 +1,15 @@
-import axios from "axios";
-import React, { Component } from "react";
+import React from "react";
+import ShowProfileData from "./ShowProfileData"
 
 class OwnProfile extends React.Component {
     state = {
-      userData: []
+      userData: this.props.theLoggedInUser
     };
-  
-  // userData is given as props from App.js
-    componentDidMount() {
-      this.setState({ userData: this.props.theLoggedInUser })
-    }
   
     render() {
       return (
         <div>
-          {/* {this.state.userData} */}
-          {console.log("this.state.userData._id: "+this.state.userData._id)}
+          <ShowProfileData dataToBeShown={this.state.userData} />
         </div>
       );
     }

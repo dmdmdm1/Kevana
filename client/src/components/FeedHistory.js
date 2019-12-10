@@ -12,16 +12,17 @@ class FeedHistory extends React.Component {
         {!this.props.isLoading && this.props.history.length === 0 ? (
           <h2>no one practiced any videos so far...</h2>
         ) : null}
-        {this.props.history.map(video => (
-          <div key={video._id}>
+        {this.props.history.map(itemInHistory => (
+          <div key={itemInHistory._id}>
             {/* here we can link to the user page of the person that practiced video */}
-            Some user practiced this one:
-            {/* <Link to={`/videos/${video._id}`}>
-                Title: {video.practiced_video.title}{" "} */}
-            <Link to={`/videos/${video.practiced_video._id}`}>
-              Title: {video.practiced_video.title}{" "}
+            <Link to={`/profile/${itemInHistory.user_name._id}`}>
+             A user {" "}
             </Link>
-            -- video_id: {video.practiced_video.video_id}{" "}
+            practiced this video:
+            <Link to={`/videos/${itemInHistory.practiced_video._id}`}>
+              {itemInHistory.practiced_video.title}{" "}
+            </Link>
+            {/* -- video_id: {itemInHistory.practiced_video.video_id}{" "} */}
           </div>
         ))}
       </div>
