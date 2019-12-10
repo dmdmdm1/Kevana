@@ -14,7 +14,9 @@ export default class Home extends Component {
     history: [],
     isLoading: true,
     historyIsLoading: true,
-    filter: {}
+    filter: {
+      bodyParts: []
+    }
   };
   componentDidMount() {
     this.getAllVideos();
@@ -78,8 +80,8 @@ export default class Home extends Component {
   render() {
     const videos =
       this.state.search === "" ? this.state.videos : this.state.displayedVideos;
-    const filteredVideos = videos.filter(video => {
-
+    console.log(videos);
+    let filteredVideos = videos.filter(video => {
       if (this.state.filter.length) {
         if (
           this.state.filter.length + 180 <= video.length ||
@@ -90,6 +92,19 @@ export default class Home extends Component {
       }
       return true;
     });
+    if (this.state.filter.bodyParts.length > 0) {
+      filteredVideos = filteredVideos.filter(video => {
+        let found = false;
+        this.state.filter.bodyParts.forEach(b => {
+          console.log(b, video.bodyParts);
+          if (video.bodyParts.includes(b)) {
+            console.log("TRUEEEE");
+            found = true;
+          }
+        });
+        return found;
+      });
+    }
     let videoResults = null;
     if (this.state.search === "" && this.state.filter === {}) {
       videoResults = this.state.videos;
@@ -129,9 +144,9 @@ export default class Home extends Component {
               size="sm"
               onClick={() => {
                 if (this.state.filter.length !== 300) {
-                  this.setFilter("length buttonSpaceIsBetter", 300);
+                  this.setFilter("length", 300);
                 } else {
-                  this.setFilter("length buttonSpaceIsBetter", null);
+                  this.setFilter("length", null);
                 }
               }}
             >
@@ -171,19 +186,25 @@ export default class Home extends Component {
             >
               15 min
             </Button>
-            <p className="length"> bodyparts:</p>
+            <p className="length">bodyparts:</p>
             <Button
               variant={
-                this.state.filter.length === 300
+                this.state.filter.bodyParts.includes("mind")
                   ? "info buttonSpaceIsBetter"
                   : "outline-info buttonSpaceIsBetter"
               }
               size="sm"
               onClick={() => {
-                if (this.state.filter.length !== 300) {
-                  this.setFilter("length buttonSpaceIsBetter", 300);
+                if (!this.state.filter.bodyParts.includes("mind")) {
+                  this.setFilter("bodyParts", [
+                    ...this.state.filter.bodyParts,
+                    "mind"
+                  ]);
                 } else {
-                  this.setFilter("length buttonSpaceIsBetter", null);
+                  this.setFilter(
+                    "bodyParts",
+                    this.state.filter.bodyParts.filter(e => e !== "mind")
+                  );
                 }
               }}
             >
@@ -198,9 +219,9 @@ export default class Home extends Component {
               size="sm"
               onClick={() => {
                 if (this.state.filter.length !== 300) {
-                  this.setFilter("length buttonSpaceIsBetter", 300);
+                  this.setFilter("length", 300);
                 } else {
-                  this.setFilter("length buttonSpaceIsBetter", null);
+                  this.setFilter("length", null);
                 }
               }}
             >
@@ -215,13 +236,116 @@ export default class Home extends Component {
               size="sm"
               onClick={() => {
                 if (this.state.filter.length !== 300) {
-                  this.setFilter("length buttonSpaceIsBetter", 300);
+                  this.setFilter("length", 300);
                 } else {
-                  this.setFilter("length buttonSpaceIsBetter", null);
+                  this.setFilter("length", null);
                 }
               }}
             >
               shoulders
+            </Button>
+            <Button
+              variant={
+                this.state.filter.length === 300
+                  ? "info buttonSpaceIsBetter"
+                  : "outline-info buttonSpaceIsBetter"
+              }
+              size="sm"
+              onClick={() => {
+                if (this.state.filter.length !== 300) {
+                  this.setFilter("length", 300);
+                } else {
+                  this.setFilter("length", null);
+                }
+              }}
+            >
+              neck
+            </Button>
+            <Button
+              variant={
+                this.state.filter.length === 300
+                  ? "info buttonSpaceIsBetter"
+                  : "outline-info buttonSpaceIsBetter"
+              }
+              size="sm"
+              onClick={() => {
+                if (this.state.filter.length !== 300) {
+                  this.setFilter("length", 300);
+                } else {
+                  this.setFilter("length", null);
+                }
+              }}
+            >
+              back
+            </Button>
+            <Button
+              variant={
+                this.state.filter.length === 300
+                  ? "info buttonSpaceIsBetter"
+                  : "outline-info buttonSpaceIsBetter"
+              }
+              size="sm"
+              onClick={() => {
+                if (this.state.filter.length !== 300) {
+                  this.setFilter("length", 300);
+                } else {
+                  this.setFilter("length", null);
+                }
+              }}
+            >
+              core
+            </Button>
+            <p className="length"> difficulty-level:</p>
+            <Button
+              variant={
+                this.state.filter.length === 300
+                  ? "info buttonSpaceIsBetter"
+                  : "outline-info buttonSpaceIsBetter"
+              }
+              size="sm"
+              onClick={() => {
+                if (this.state.filter.length !== 300) {
+                  this.setFilter("length", 300);
+                } else {
+                  this.setFilter("length", null);
+                }
+              }}
+            >
+              beginner
+            </Button>
+            <Button
+              variant={
+                this.state.filter.length === 300
+                  ? "info buttonSpaceIsBetter"
+                  : "outline-info buttonSpaceIsBetter"
+              }
+              size="sm"
+              onClick={() => {
+                if (this.state.filter.length !== 300) {
+                  this.setFilter("length", 300);
+                } else {
+                  this.setFilter("length", null);
+                }
+              }}
+            >
+              intermediate
+            </Button>
+            <Button
+              variant={
+                this.state.filter.length === 300
+                  ? "info buttonSpaceIsBetter"
+                  : "outline-info buttonSpaceIsBetter"
+              }
+              size="sm"
+              onClick={() => {
+                if (this.state.filter.length !== 300) {
+                  this.setFilter("length", 300);
+                } else {
+                  this.setFilter("length", null);
+                }
+              }}
+            >
+              advanced
             </Button>
           </ButtonToolbar>
         </div>
