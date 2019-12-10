@@ -68,6 +68,7 @@ class App extends React.Component {
               <SomeProfile
                 {...props}
                 theLoggedInUser={this.state.loggedInUser}
+                updateUser={this.updateUserHandler}
               />
             )}
           />
