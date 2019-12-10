@@ -4,6 +4,7 @@ import LazyLoad from "react-lazyload";
 
 class AllVideos extends React.Component {
   render() {
+    console.log("props", this.props);
     return (
       <div id="video-list-container">
         <div id="video-container">
@@ -24,13 +25,10 @@ class AllVideos extends React.Component {
                     <div className="card-body">
                       <h4 className="card-title">{video.title}</h4>
                     </div>
-                    <p className="card-text">
-                      here is the description: {video.description}.{" "}
-                    </p>
+                    <p className="card-text">{video.description}. </p>
                     <Link to={`/videos/${video._id}`}>Watch Video</Link>
                   </div>
                 </LazyLoad>
-                );
               </div>
             );
           })}

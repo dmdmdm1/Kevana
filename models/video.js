@@ -9,7 +9,7 @@ const videoSchema = new Schema({
   channel: String,
   length: Number,
   difficultyLevel: String,
-  bodyParts: String,
+  bodyParts: [String],
   description: String,
   image: String,
   tags: Array

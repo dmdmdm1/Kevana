@@ -53,11 +53,9 @@ class ShinyLogin extends React.Component {
 
   submitHandler = event => {
     event.preventDefault();
-    console.log("clicked");
     axios
       .post("/api/auth/login", this.state)
       .then(response => {
-        console.log(response);
         this.props.updateUser(response.data);
       })
       .catch(error => {

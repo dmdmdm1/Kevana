@@ -60,7 +60,6 @@ class ShinySignUp extends React.Component {
         this.props.history.push("/");
       })
       .catch(error => {
-        console.log("error.response", error.response);
         this.setState({
           emailError: error.response.data.emailMessage,
           passwordError: error.response.data.passwordMessage

@@ -52,6 +52,7 @@ h1 {
   border: none;
   border-radius: 25px;
   outline: none;
+  margin-left: 70px;
 }
 
 .business {
@@ -83,3 +84,23 @@ h1 {
   position: relative;
   top: 3px;
 }
+
+#sign-out {
+  list-style: none;
+}
+
+.btn-link .btn-link:hover {
+  color: #23527c;
+  text-decoration: none;
+}
+
+/* if we didn't want it to look like a button */
+/* #so {
+  border: 0;
+  background-color: transparent;
+} */
+
+/* if we want to change link color */
+/* nav .navbar-nav li a {
+  color: #09d3ac !important;
+} */

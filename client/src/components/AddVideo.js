@@ -1,9 +1,26 @@
 import React, { Component } from "react";
 import { TextField, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
 import axios from "axios";
 import { withRouter } from "react-router-dom";
+import Checkbox from "@material-ui/core/Checkbox";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormGroup from "@material-ui/core/FormGroup";
+import FormLabel from "@material-ui/core/FormLabel";
+import FormControl from "@material-ui/core/FormControl";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import DifficultyLevel from "./DifficultyLevel";
+
+const BODY_PARTS = [
+  "mind",
+  "legs",
+  "back",
+  "neck",
+  "shoulders",
+  "hands",
+  "feet",
+  "core"
+];
 
 const withMyStyles = withStyles(theme => ({
   root: {
@@ -27,10 +44,13 @@ const withMyStyles = withStyles(theme => ({
 class AddVideo extends Component {
   state = {
     videoUrl: "",
-    bodyParts: "",
+    bodyParts: [],
     difficultyLevel: "",
-    creationError: null
+    creationError: null,
+    bodyPartsError: null
   };
+
+  //  error = this.state.bodyParts.filter(v => v).length < 1;
 
   onVideoCreation = event => {
     event.preventDefault();
@@ -44,7 +64,6 @@ class AddVideo extends Component {
         this.props.history.push(`videos/${response.data._id}`); // go to created video
       })
       .catch(error => {
-        console.log("hi", error);
         if (error.response.status === 409) {
           this.setState({
             creationError: error.response.data.message
@@ -52,6 +71,10 @@ class AddVideo extends Component {
         } else if (error.response.status === 422) {
           this.setState({
             creationError: error.response.data.message
+          });
+        } else if (error.response.status === 400) {
+          this.setState({
+            bodyPartsError: error.response.data.error
           });
         } else {
           this.setState({
@@ -65,13 +88,26 @@ class AddVideo extends Component {
     this.setState({ videoUrl: event.target.value });
   };
 
-  onbodyPartsChange = event => {
-    this.setState({ bodyParts: event.target.value });
+  onBodyPartsChange = event => {
+    if (event.target.checked) {
+      this.setState({
+        bodyParts: [...this.state.bodyParts, event.target.value]
+      });
+    } else {
+      this.setState({
+        bodyParts: this.state.bodyParts.filter(
+          elem => elem !== event.target.value
+        )
+      });
+    }
   };
 
-  ondifficultyLevelChange = event => {
+  onDifficultyLevelChange = event => {
     this.setState({ difficultyLevel: event.target.value });
   };
+  // onDifficultyLevelChange = event => {
+  //
+  // };
   render() {
     return (
       <form className="{classes.container}" noValidate autoComplete="off">
@@ -89,31 +125,31 @@ class AddVideo extends Component {
             onChange={this.onVideoUrlChange}
             value={this.state.videoUrl}
           />
-          <TextField
-            error={this.state.creationError ? true : false}
-            helperText={this.state.creationError}
-            variant="outlined"
-            fullWidth
+          <FormLabel component="legend">Pick the targeted body parts</FormLabel>
+          <FormControl
             required
-            margin="normal"
-            name="body-parts"
-            id="standard-required"
-            label="Body Parts"
-            onChange={this.onbodyPartsChange}
-            value={this.state.bodyParts}
-          />
-          <TextField
-            error={this.state.creationError ? true : false}
-            helperText={this.state.creationError}
-            variant="outlined"
-            fullWidth
-            required
-            margin="normal"
-            name="difficulty-level"
-            id="standard-required"
-            label="Difficulty Level"
-            onChange={this.ondifficultyLevelChange}
-            value={this.state.difficultyLevel}
+            error={this.state.bodyPartsError ? true : false}
+            component="fieldset"
+          >
+            {BODY_PARTS.map(bodyPart => (
+              <FormGroup row key={BODY_PARTS.indexOf(bodyPart)}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={this.state.bodyParts.includes(bodyPart)}
+                      onChange={this.onBodyPartsChange}
+                      value={bodyPart}
+                    />
+                  }
+                  label={bodyPart}
+                />
+              </FormGroup>
+            ))}
+          </FormControl>
+          <FormHelperText>{this.state.bodyPartsError}</FormHelperText>
+          <DifficultyLevel
+            initialDifficulty={this.state.difficultyLevel}
+            onDifficultyLevelChange={this.onDifficultyLevelChange}
           />
           <Button
             variant="contained"
