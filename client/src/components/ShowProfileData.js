@@ -5,27 +5,25 @@ function ShowProfileData(props) {
   const { userName, favorites, follows, email } = props.dataToBeShown;
   return (
     <div>
-      <p>Username: {userName}</p>
-      Favorites:{" "}
+      {/* <p>Username: {userName}</p> */}
+      {/* Favorites:{" "}
       {favorites.length ? (
         <p>there is at least one favorite</p>
       ) : (
         <p>there are no favorites yet</p>
-      )}
-      Follows these users:{" "}
+      )} */}
+      User {email} 
       {follows.length ? (
         <div>
-          this user is following people!!!
-          {follows.map(followedUsers => (
-            <div key={followedUsers}>
-              <Link to={`/profile/${followedUsers}`}>
-                link to the user{" "}
-              </Link>
+          is following these users:{" "}
+          {follows.map(followedUser => (
+            <div key={followedUser}>
+              <Link to={`/profile/${followedUser._id}`}>{followedUser.email} </Link>
             </div>
           ))}
         </div>
       ) : (
-        <p>not following anyone ... YET!!!!!11</p>
+        <p>is not following anyone</p>
       )}
     </div>
   );

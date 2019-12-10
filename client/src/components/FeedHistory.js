@@ -1,10 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-
 class FeedHistory extends React.Component {
   render() {
-
     return (
       <div id="video-list-container">
         <h1>Here's what users have been practicing</h1>
@@ -16,7 +14,7 @@ class FeedHistory extends React.Component {
           <div key={itemInHistory._id}>
             {/* here we can link to the user page of the person that practiced video */}
             <Link to={`/profile/${itemInHistory.user_name._id}`}>
-             A user {" "}
+              {itemInHistory.user_name.email + " "}
             </Link>
             practiced this video:
             <Link to={`/videos/${itemInHistory.practiced_video._id}`}>
