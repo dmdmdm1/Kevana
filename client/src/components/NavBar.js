@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function NavBar(props) {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light navbar-custom">
       <Link to="/" className="navbar-brand" href="#">
         Kevana
       </Link>
@@ -18,7 +18,10 @@ export default function NavBar(props) {
       >
         <span className="navbar-toggler-icon"></span>
       </button>
-      <div className="collapse navbar-collapse" id="navbarNavDropdown">
+      <div
+        className="collapse navbar-collapse justify-content-between"
+        id="navbarNavDropdown"
+      >
         <ul className="navbar-nav">
           <li className="nav-item active">
             <Link className="nav-link" to="/">
@@ -35,8 +38,15 @@ export default function NavBar(props) {
               Add new video
             </Link>
           </li>
+        </ul>
+      </div>
+      <div
+        className="collapse navbar-collapse justify-content-end"
+        id="navbarNavDropdown"
+      >
+        <ul id="sign-out">
           <li className="nav-item">
-            <button className="nav-link" onClick={props.signOutHandler}>
+            <button className="nav-link" id="so" onClick={props.signOutHandler}>
               Logout
             </button>
           </li>
