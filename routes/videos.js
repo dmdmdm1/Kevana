@@ -33,9 +33,29 @@ router.get("/:id", function(req, res, next) {
 // POST /api/videos
 router.post("/", (req, res, next) => {
   const url = urlParse(req.body.videoUrl, true);
+  const BODY_PARTS = [
+    "mind",
+    "legs",
+    "back",
+    "neck",
+    "shoulders",
+    "hands",
+    "feet",
+    "core"
+  ];
 
   if (!(url.host === "www.youtube.com" && url.query.v)) {
     res.status(400).json({ error: "Invalid URL supplied!" });
+    return;
+  }
+
+  if (!req.body.bodyParts.every(element => BODY_PARTS.includes(element))) {
+    res.status(400).json({ error: "Invalid Body Parts" });
+    return;
+  }
+
+  if (!Array.isArray(req.body.bodyParts) || !req.body.bodyParts.length) {
+    res.status(400).json({ error: "At least one Body part must be checked" });
     return;
   }
 

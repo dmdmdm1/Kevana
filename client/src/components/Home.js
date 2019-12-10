@@ -23,7 +23,6 @@ export default class Home extends Component {
 
   getAllVideos = () => {
     axios.get("/api/videos").then(response => {
-      console.log("response", response);
       this.setState({ videos: response.data, isLoading: false }); // this triggers a re-render
     });
   };
@@ -77,10 +76,10 @@ export default class Home extends Component {
   };
 
   render() {
-    console.log("videos", this.state.videos);
     const videos =
       this.state.search === "" ? this.state.videos : this.state.displayedVideos;
     const filteredVideos = videos.filter(video => {
+
       if (this.state.filter.length) {
         if (
           this.state.filter.length + 180 <= video.length ||
