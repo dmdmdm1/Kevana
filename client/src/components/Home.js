@@ -78,7 +78,9 @@ export default class Home extends Component {
 
   render() {
     console.log("videos", this.state.videos);
-    const videos = this.state.videos.filter(video => {
+    const videos =
+      this.state.search === "" ? this.state.videos : this.state.displayedVideos;
+    const filteredVideos = videos.filter(video => {
       if (this.state.filter.length) {
         if (
           this.state.filter.length + 180 <= video.length ||
@@ -89,6 +91,17 @@ export default class Home extends Component {
       }
       return true;
     });
+    let videoResults = null;
+    if (this.state.search === "" && this.state.filter === {}) {
+      videoResults = this.state.videos;
+    } else if (this.state.search !== "" && this.state.filter === {}) {
+      videoResults = this.state.displayedVideos;
+    } else {
+      videoResults = filteredVideos;
+    }
+
+    const processedVideos = videoResults;
+
     return (
       <div>
         <div className="header">
@@ -164,13 +177,9 @@ export default class Home extends Component {
         <AllVideos
           exact
           path="/"
-          videos={
-            this.state.search === ""
-              ? this.state.videos
-              : this.state.displayedVideos
-          }
           search={this.state.search}
           isLoading={this.state.isLoading}
+          videos={processedVideos}
         />
         <FeedHistory
           history={this.state.history}
