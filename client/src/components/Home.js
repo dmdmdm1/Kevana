@@ -34,31 +34,6 @@ export default class Home extends Component {
     });
   };
 
-  // searchHandler = event => {
-  //   this.setState({
-  //     search: event.target.value
-  //   });
-  // };
-
-  // searchHandler = e => {
-  //   let searchQuery = e.target.value;
-  //   let currentList = [];
-  //   let newList = [];
-
-  //   if (searchQuery !== "") {
-  //     currentList = this.state.videos;
-  //     newList = currentList.filter(video =>
-  //       video.title.toLowerCase().includes(searchQuery.toLowerCase())
-  //     );
-  //   } else {
-  //     newList = this.state.videos;
-  //   }
-
-  //   this.setState({
-  //     videos: newList
-  //   });
-  // };
-
   searchHandler = e => {
     this.setState({
       search: e.target.value
@@ -101,18 +76,6 @@ export default class Home extends Component {
     });
   };
 
-  // searchButtonHandler = event => {
-  //   event.preventDefault();
-  //   this.setState({
-  //     videos: this.state.videos.filter(video => {
-  //       return (
-  //         video.title.toLowerCase().indexOf(this.state.search.toLowerCase()) !==
-  //         -1
-  //       );
-  //     })
-  //   });
-  // };
-
   render() {
     console.log("videos", this.state.videos);
     const videos = this.state.videos.filter(video => {
@@ -138,13 +101,6 @@ export default class Home extends Component {
                 className="search-field business"
                 placeholder="Search"
               ></input>
-              <button
-                className="search-btn"
-                type="button"
-                onClick={this.searchButtonHandler}
-              >
-                Go
-              </button>
             </div>
           </form>
         </div>
