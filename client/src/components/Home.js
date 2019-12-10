@@ -146,6 +146,58 @@ export default class Home extends Component {
             >
               15 min
             </Button>
+            <p className="length"> bodyparts:</p>
+            <Button
+              variant={
+                this.state.filter.length === 300
+                  ? "info buttonSpaceIsBetter"
+                  : "outline-info buttonSpaceIsBetter"
+              }
+              size="sm"
+              onClick={() => {
+                if (this.state.filter.length !== 300) {
+                  this.setFilter("length buttonSpaceIsBetter", 300);
+                } else {
+                  this.setFilter("length buttonSpaceIsBetter", null);
+                }
+              }}
+            >
+              mind
+            </Button>
+            <Button
+              variant={
+                this.state.filter.length === 300
+                  ? "info buttonSpaceIsBetter"
+                  : "outline-info buttonSpaceIsBetter"
+              }
+              size="sm"
+              onClick={() => {
+                if (this.state.filter.length !== 300) {
+                  this.setFilter("length buttonSpaceIsBetter", 300);
+                } else {
+                  this.setFilter("length buttonSpaceIsBetter", null);
+                }
+              }}
+            >
+              legs
+            </Button>
+            <Button
+              variant={
+                this.state.filter.length === 300
+                  ? "info buttonSpaceIsBetter"
+                  : "outline-info buttonSpaceIsBetter"
+              }
+              size="sm"
+              onClick={() => {
+                if (this.state.filter.length !== 300) {
+                  this.setFilter("length buttonSpaceIsBetter", 300);
+                } else {
+                  this.setFilter("length buttonSpaceIsBetter", null);
+                }
+              }}
+            >
+              shoulders
+            </Button>
           </ButtonToolbar>
         </div>
         <AllVideos
