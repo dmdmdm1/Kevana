@@ -108,10 +108,30 @@ h1 {
 
 .watch {
   color: white;
-  background-color: skyblue;
-  border: 1px solid skyblue;
+  background-color: #17a2b8;
+  border: 1px solid #17a2b8;
 }
 
+.back {
+  color: white;
+  background-color: pink;
+  border: 1px solid pink;
+  margin-top: 20px;
+  margin-left: 10px;
+}
+
+#practiced {
+  margin-top: 20px;
+}
+.single-video-page {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.single-video-container {
+  display: inline-block;
+  margin-top: 20px;
+}
 /* if we didn't want it to look like a button */
 /* #so {
   border: 0;
