@@ -43,7 +43,11 @@ class SingleVideo extends React.Component {
         {this.state.video.title}
         {console.log(this.state)}
         <ReactPlayer url={this.state.video.link} />
-        <button type="button" onClick={this.practicedButtonHandler}>
+        <button
+          type="button"
+          className="watch"
+          onClick={this.practicedButtonHandler}
+        >
           I practiced this video
         </button>
         <Link to={`/`}>Back to all videos </Link>
