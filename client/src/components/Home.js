@@ -14,7 +14,9 @@ export default class Home extends Component {
     history: [],
     isLoading: true,
     historyIsLoading: true,
-    filter: {}
+    filter: {
+      bodyParts: []
+    }
   };
   componentDidMount() {
     this.getAllVideos();
@@ -76,10 +78,11 @@ export default class Home extends Component {
   };
 
   render() {
+    const levels = ["Beginner, Intermediate, Advanced"];
     const videos =
       this.state.search === "" ? this.state.videos : this.state.displayedVideos;
-    const filteredVideos = videos.filter(video => {
-
+    console.log(videos);
+    let filteredVideos = videos.filter(video => {
       if (this.state.filter.length) {
         if (
           this.state.filter.length + 180 <= video.length ||
@@ -90,6 +93,29 @@ export default class Home extends Component {
       }
       return true;
     });
+    if (this.state.filter.bodyParts.length > 0) {
+      filteredVideos = filteredVideos.filter(video => {
+        let found = false;
+        this.state.filter.bodyParts.forEach(b => {
+          console.log(b, video.bodyParts);
+          if (video.bodyParts.includes(b)) {
+            console.log("TRUEEEE");
+            found = true;
+          }
+        });
+        return found;
+      });
+    }
+    if (this.state.filter.difficultyLevel) {
+      filteredVideos = filteredVideos.filter(video => {
+        if (this.state.filter.difficultyLevel !== video.difficultyLevel) {
+          return false;
+        }
+        return true;
+      });
+    }
+
+    console.log("filtered", filteredVideos);
     let videoResults = null;
     if (this.state.search === "" && this.state.filter === {}) {
       videoResults = this.state.videos;
@@ -129,9 +155,9 @@ export default class Home extends Component {
               size="sm"
               onClick={() => {
                 if (this.state.filter.length !== 300) {
-                  this.setFilter("length buttonSpaceIsBetter", 300);
+                  this.setFilter("length", 300);
                 } else {
-                  this.setFilter("length buttonSpaceIsBetter", null);
+                  this.setFilter("length", null);
                 }
               }}
             >
@@ -170,6 +196,243 @@ export default class Home extends Component {
               }}
             >
               15 min
+            </Button>
+            <p className="length">bodyparts:</p>
+            <Button
+              variant={
+                this.state.filter.bodyParts.includes("mind")
+                  ? "info buttonSpaceIsBetter"
+                  : "outline-info buttonSpaceIsBetter"
+              }
+              size="sm"
+              onClick={() => {
+                if (!this.state.filter.bodyParts.includes("mind")) {
+                  this.setFilter("bodyParts", [
+                    ...this.state.filter.bodyParts,
+                    "mind"
+                  ]);
+                } else {
+                  this.setFilter(
+                    "bodyParts",
+                    this.state.filter.bodyParts.filter(e => e !== "mind")
+                  );
+                }
+              }}
+            >
+              mind
+            </Button>
+            <Button
+              variant={
+                this.state.filter.bodyParts.includes("legs")
+                  ? "info buttonSpaceIsBetter"
+                  : "outline-info buttonSpaceIsBetter"
+              }
+              size="sm"
+              onClick={() => {
+                if (!this.state.filter.bodyParts.includes("legs")) {
+                  this.setFilter("bodyParts", [
+                    ...this.state.filter.bodyParts,
+                    "legs"
+                  ]);
+                } else {
+                  this.setFilter(
+                    "bodyParts",
+                    this.state.filter.bodyParts.filter(e => e !== "legs")
+                  );
+                }
+              }}
+            >
+              legs
+            </Button>
+            <Button
+              variant={
+                this.state.filter.bodyParts.includes("shoulders")
+                  ? "info buttonSpaceIsBetter"
+                  : "outline-info buttonSpaceIsBetter"
+              }
+              size="sm"
+              onClick={() => {
+                if (!this.state.filter.bodyParts.includes("shoulders")) {
+                  this.setFilter("bodyParts", [
+                    ...this.state.filter.bodyParts,
+                    "shoulders"
+                  ]);
+                } else {
+                  this.setFilter(
+                    "bodyParts",
+                    this.state.filter.bodyParts.filter(e => e !== "shoulders")
+                  );
+                }
+              }}
+            >
+              shoulders
+            </Button>
+            <Button
+              variant={
+                this.state.filter.bodyParts.includes("neck")
+                  ? "info buttonSpaceIsBetter"
+                  : "outline-info buttonSpaceIsBetter"
+              }
+              size="sm"
+              onClick={() => {
+                if (!this.state.filter.bodyParts.includes("neck")) {
+                  this.setFilter("bodyParts", [
+                    ...this.state.filter.bodyParts,
+                    "neck"
+                  ]);
+                } else {
+                  this.setFilter(
+                    "bodyParts",
+                    this.state.filter.bodyParts.filter(e => e !== "neck")
+                  );
+                }
+              }}
+            >
+              neck
+            </Button>
+            <Button
+              variant={
+                this.state.filter.bodyParts.includes("back")
+                  ? "info buttonSpaceIsBetter"
+                  : "outline-info buttonSpaceIsBetter"
+              }
+              size="sm"
+              onClick={() => {
+                if (!this.state.filter.bodyParts.includes("back")) {
+                  this.setFilter("bodyParts", [
+                    ...this.state.filter.bodyParts,
+                    "back"
+                  ]);
+                } else {
+                  this.setFilter(
+                    "bodyParts",
+                    this.state.filter.bodyParts.filter(e => e !== "back")
+                  );
+                }
+              }}
+            >
+              back
+            </Button>
+            <Button
+              variant={
+                this.state.filter.bodyParts.includes("core")
+                  ? "info buttonSpaceIsBetter"
+                  : "outline-info buttonSpaceIsBetter"
+              }
+              size="sm"
+              onClick={() => {
+                if (!this.state.filter.bodyParts.includes("core")) {
+                  this.setFilter("bodyParts", [
+                    ...this.state.filter.bodyParts,
+                    "core"
+                  ]);
+                } else {
+                  this.setFilter(
+                    "bodyParts",
+                    this.state.filter.bodyParts.filter(e => e !== "core")
+                  );
+                }
+              }}
+            >
+              core
+            </Button>
+            <Button
+              variant={
+                this.state.filter.bodyParts.includes("hand")
+                  ? "info buttonSpaceIsBetter"
+                  : "outline-info buttonSpaceIsBetter"
+              }
+              size="sm"
+              onClick={() => {
+                if (!this.state.filter.bodyParts.includes("hand")) {
+                  this.setFilter("bodyParts", [
+                    ...this.state.filter.bodyParts,
+                    "hand"
+                  ]);
+                } else {
+                  this.setFilter(
+                    "bodyParts",
+                    this.state.filter.bodyParts.filter(e => e !== "hand")
+                  );
+                }
+              }}
+            >
+              hand
+            </Button>
+            <Button
+              variant={
+                this.state.filter.bodyParts.includes("feet")
+                  ? "info buttonSpaceIsBetter"
+                  : "outline-info buttonSpaceIsBetter"
+              }
+              size="sm"
+              onClick={() => {
+                if (!this.state.filter.bodyParts.includes("feet")) {
+                  this.setFilter("bodyParts", [
+                    ...this.state.filter.bodyParts,
+                    "feet"
+                  ]);
+                } else {
+                  this.setFilter(
+                    "bodyParts",
+                    this.state.filter.bodyParts.filter(e => e !== "feet")
+                  );
+                }
+              }}
+            >
+              feet
+            </Button>
+            <p className="length"> difficulty-level:</p>
+            <Button
+              variant={
+                this.state.filter.difficultyLevel === "Beginner"
+                  ? "info buttonSpaceIsBetter"
+                  : "outline-info buttonSpaceIsBetter"
+              }
+              size="sm"
+              onClick={() => {
+                if (this.state.filter.difficultyLevel !== "Beginner") {
+                  this.setFilter("difficultyLevel", "Beginner");
+                } else {
+                  this.setFilter("difficultyLevel", null);
+                }
+              }}
+            >
+              beginner
+            </Button>
+            <Button
+              variant={
+                this.state.filter.difficultyLevel === "Intermediate"
+                  ? "info buttonSpaceIsBetter"
+                  : "outline-info buttonSpaceIsBetter"
+              }
+              size="sm"
+              onClick={() => {
+                if (this.state.filter.difficultyLevel !== "Intermediate") {
+                  this.setFilter("difficultyLevel", "Intermediate");
+                } else {
+                  this.setFilter("difficultyLevel", null);
+                }
+              }}
+            >
+              intermediate
+            </Button>
+            <Button
+              variant={
+                this.state.filter.difficultyLevel === "Advanced"
+                  ? "info buttonSpaceIsBetter"
+                  : "outline-info buttonSpaceIsBetter"
+              }
+              size="sm"
+              onClick={() => {
+                if (this.state.filter.difficultyLevel !== "Advanced") {
+                  this.setFilter("difficultyLevel", "Advanced");
+                } else {
+                  this.setFilter("difficultyLevel", null);
+                }
+              }}
+            >
+              advanced
             </Button>
           </ButtonToolbar>
         </div>
