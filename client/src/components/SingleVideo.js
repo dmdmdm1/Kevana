@@ -27,26 +27,27 @@ class SingleVideo extends React.Component {
         // this.props.history.push(`videos/${response.data._id}`) // go to created video
       });
   };
-  // video:
-  // channel: "Yoga With Adriene"
-  // length: 693
-  // link: "https://www.youtube.com/watch?v=UEEsdXn8oG8"
-  // owner: "5dd015c1eb56242e6d92f92f"
-  // title: "!Wake Up Yoga - 11 Minute Morning Yoga Practice - Yoga With Adriene"
-  // video_id: "UEEsdXn8oG8"
-  // __v: 0
-  // _id: "5dd433d24ba06d091480590e"
-
   render() {
     return (
-      <div>
-        {this.state.video.title}
-        {console.log(this.state)}
-        <ReactPlayer url={this.state.video.link} />
-        <button type="button" onClick={this.practicedButtonHandler}>
-          I practiced this video
-        </button>
-        <Link to={`/`}>Back to all videos </Link>
+      <div className="single-video-page">
+        <div className="single-video-container">
+          <h2>{this.state.video.title}</h2>
+          {console.log(this.state)}
+          <ReactPlayer url={this.state.video.link} />
+          <button
+            type="button"
+            className="watch"
+            id="practiced"
+            onClick={this.practicedButtonHandler}
+          >
+            I practiced this video
+          </button>
+          <Link to={`/`}>
+            <button className="back" type="button">
+              Back to all videos
+            </button>
+          </Link>
+        </div>
       </div>
     );
   }

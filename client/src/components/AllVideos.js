@@ -26,7 +26,11 @@ class AllVideos extends React.Component {
                       <h4 className="card-title">{video.title}</h4>
                     </div>
                     <p className="card-text">{video.description}. </p>
-                    <Link to={`/videos/${video._id}`}>Watch Video</Link>
+                    <Link to={`/videos/${video._id}`}>
+                      <button className="watch" type="button">
+                        Watch Video
+                      </button>
+                    </Link>
                   </div>
                 </LazyLoad>
               </div>
