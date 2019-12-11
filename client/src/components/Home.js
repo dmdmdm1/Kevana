@@ -78,6 +78,7 @@ export default class Home extends Component {
   };
 
   render() {
+    const levels = ["Beginner, Intermediate, Advanced"];
     const videos =
       this.state.search === "" ? this.state.videos : this.state.displayedVideos;
     console.log(videos);
@@ -105,6 +106,15 @@ export default class Home extends Component {
         return found;
       });
     }
+    if (this.state.filter.difficultyLevel) {
+      filteredVideos = filteredVideos.filter(video => {
+        if (levels.includes(this.state.filter.difficultyLevel)) {
+          return true;
+        }
+      });
+      return false;
+    }
+
     let videoResults = null;
     if (this.state.search === "" && this.state.filter === {}) {
       videoResults = this.state.videos;
@@ -298,16 +308,16 @@ export default class Home extends Component {
             <p className="length"> difficulty-level:</p>
             <Button
               variant={
-                this.state.filter.length === 300
+                this.state.filter.difficultyLevel === "Beginner"
                   ? "info buttonSpaceIsBetter"
                   : "outline-info buttonSpaceIsBetter"
               }
               size="sm"
               onClick={() => {
-                if (this.state.filter.length !== 300) {
-                  this.setFilter("length", 300);
+                if (this.state.filter.difficultyLevel !== "Beginner") {
+                  this.setFilter("difficultyLevel", "Beginner");
                 } else {
-                  this.setFilter("length", null);
+                  this.setFilter("difficultyLevel", null);
                 }
               }}
             >
@@ -315,16 +325,16 @@ export default class Home extends Component {
             </Button>
             <Button
               variant={
-                this.state.filter.length === 300
+                this.state.filter.difficultyLevel === "Intermediate"
                   ? "info buttonSpaceIsBetter"
                   : "outline-info buttonSpaceIsBetter"
               }
               size="sm"
               onClick={() => {
-                if (this.state.filter.length !== 300) {
-                  this.setFilter("length", 300);
+                if (this.state.filter.difficultyLevel !== "Intermediate") {
+                  this.setFilter("difficultyLevel", "Intermediate");
                 } else {
-                  this.setFilter("length", null);
+                  this.setFilter("difficultyLevel", null);
                 }
               }}
             >
@@ -332,16 +342,16 @@ export default class Home extends Component {
             </Button>
             <Button
               variant={
-                this.state.filter.length === 300
+                this.state.filter.difficultyLevel === "Advanced"
                   ? "info buttonSpaceIsBetter"
                   : "outline-info buttonSpaceIsBetter"
               }
               size="sm"
               onClick={() => {
-                if (this.state.filter.length !== 300) {
-                  this.setFilter("length", 300);
+                if (this.state.filter.difficultyLevel !== "Advanced") {
+                  this.setFilter("difficultyLevel", "Advanced");
                 } else {
-                  this.setFilter("length", null);
+                  this.setFilter("difficultyLevel", null);
                 }
               }}
             >
