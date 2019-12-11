@@ -106,6 +106,12 @@ h1 {
   margin-left: 20px;
 }
 
+.watch {
+  color: white;
+  background-color: skyblue;
+  border: 1px solid skyblue;
+}
+
 /* if we didn't want it to look like a button */
 /* #so {
   border: 0;
