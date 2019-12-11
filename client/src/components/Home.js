@@ -108,13 +108,14 @@ export default class Home extends Component {
     }
     if (this.state.filter.difficultyLevel) {
       filteredVideos = filteredVideos.filter(video => {
-        if (levels.includes(this.state.filter.difficultyLevel)) {
-          return true;
+        if (this.state.filter.difficultyLevel !== video.difficultyLevel) {
+          return false;
         }
+        return true;
       });
-      return false;
     }
 
+    console.log("filtered", filteredVideos);
     let videoResults = null;
     if (this.state.search === "" && this.state.filter === {}) {
       videoResults = this.state.videos;
