@@ -78,7 +78,6 @@ export default class Home extends Component {
   };
 
   render() {
-    const levels = ["Beginner, Intermediate, Advanced"];
     const videos =
       this.state.search === "" ? this.state.videos : this.state.displayedVideos;
     console.log(videos);
@@ -338,13 +337,13 @@ export default class Home extends Component {
             </Button>
             <Button
               variant={
-                this.state.filter.bodyParts.includes("hand")
+                this.state.filter.bodyParts.includes("hands")
                   ? "info buttonSpaceIsBetter"
                   : "outline-info buttonSpaceIsBetter"
               }
               size="sm"
               onClick={() => {
-                if (!this.state.filter.bodyParts.includes("hand")) {
+                if (!this.state.filter.bodyParts.includes("hands")) {
                   this.setFilter("bodyParts", [
                     ...this.state.filter.bodyParts,
                     "hand"
@@ -352,12 +351,12 @@ export default class Home extends Component {
                 } else {
                   this.setFilter(
                     "bodyParts",
-                    this.state.filter.bodyParts.filter(e => e !== "hand")
+                    this.state.filter.bodyParts.filter(e => e !== "hands")
                   );
                 }
               }}
             >
-              hand
+              hands
             </Button>
             <Button
               variant={
