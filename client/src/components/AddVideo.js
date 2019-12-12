@@ -112,6 +112,7 @@ class AddVideo extends Component {
     return (
       <form className="{classes.container}" noValidate autoComplete="off">
         <div>
+          <p>Enter the url of the video you want to add*:</p>
           <TextField
             error={this.state.creationError ? true : false}
             helperText={this.state.creationError}
@@ -125,28 +126,25 @@ class AddVideo extends Component {
             onChange={this.onVideoUrlChange}
             value={this.state.videoUrl}
           />
-          <FormLabel component="legend">Pick the targeted body parts</FormLabel>
-          <FormControl
-            required
-            error={this.state.bodyPartsError ? true : false}
-            component="fieldset"
-          >
-            {BODY_PARTS.map(bodyPart => (
-              <FormGroup row key={BODY_PARTS.indexOf(bodyPart)}>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={this.state.bodyParts.includes(bodyPart)}
-                      onChange={this.onBodyPartsChange}
-                      value={bodyPart}
-                    />
-                  }
-                  label={bodyPart}
+          <p>Pick the targeted body parts</p>
+          {BODY_PARTS.map(bodyPart => (
+            <div class="form-check form-check-inline">
+              <div key={BODY_PARTS.indexOf(bodyPart)}>
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="inlineCheckbox1"
+                  value={bodyPart}
+                  onChange={this.onBodyPartsChange}
+                  // checked={this.state.bodyParts.includes(bodyPart)}
                 />
-              </FormGroup>
-            ))}
-          </FormControl>
-          <FormHelperText>{this.state.bodyPartsError}</FormHelperText>
+                <label class="form-check-label" for="inlineCheckbox1">
+                  {bodyPart}
+                </label>
+              </div>
+            </div>
+          ))}
+          <p>{this.state.bodyPartsError}</p>
           <DifficultyLevel
             initialDifficulty={this.state.difficultyLevel}
             onDifficultyLevelChange={this.onDifficultyLevelChange}
@@ -159,6 +157,7 @@ class AddVideo extends Component {
           >
             Submit
           </Button>
+          <p>* At the moment we only support youtube videos</p>
         </div>
       </form>
     );

@@ -132,7 +132,10 @@ h1 {
   display: inline-block;
   margin-top: 20px;
 }
-/* if we didn't want it to look like a button */
+
+.container-fluid {
+  margin-top: 15px;
+} /* if we didn't want it to look like a button */
 /* #so {
   border: 0;
   background-color: transparent;
