@@ -110,57 +110,87 @@ class AddVideo extends Component {
   // };
   render() {
     return (
-      <form className="{classes.container}" noValidate autoComplete="off">
-        <div>
-          <TextField
-            error={this.state.creationError ? true : false}
-            helperText={this.state.creationError}
-            variant="outlined"
-            fullWidth
-            required
-            margin="normal"
-            name="video-url"
-            label="Video URL"
-            id="standard-required"
-            onChange={this.onVideoUrlChange}
-            value={this.state.videoUrl}
-          />
-          <FormLabel component="legend">Pick the targeted body parts</FormLabel>
-          <FormControl
-            required
-            error={this.state.bodyPartsError ? true : false}
-            component="fieldset"
-          >
-            {BODY_PARTS.map(bodyPart => (
-              <FormGroup row key={BODY_PARTS.indexOf(bodyPart)}>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={this.state.bodyParts.includes(bodyPart)}
-                      onChange={this.onBodyPartsChange}
-                      value={bodyPart}
+      <div className="add-video-page">
+        <h2>Add a video</h2>
+        <div className="card-container col-md-6">
+          <form className="{classes.container}" noValidate autoComplete="off">
+            <div>
+              <div className="well">
+                <div className="add-card">
+                  <div className="url-input-field">
+                    <p className="add-video-p">
+                      Enter the url of the video you want to add*:
+                    </p>
+                    <TextField
+                      error={this.state.creationError ? true : false}
+                      helperText={this.state.creationError}
+                      variant="outlined"
+                      fullWidth
+                      required
+                      margin="normal"
+                      name="video-url"
+                      label="Video URL"
+                      id="standard-required"
+                      onChange={this.onVideoUrlChange}
+                      value={this.state.videoUrl}
                     />
-                  }
-                  label={bodyPart}
-                />
-              </FormGroup>
-            ))}
-          </FormControl>
-          <FormHelperText>{this.state.bodyPartsError}</FormHelperText>
-          <DifficultyLevel
-            initialDifficulty={this.state.difficultyLevel}
-            onDifficultyLevelChange={this.onDifficultyLevelChange}
-          />
-          <Button
-            variant="contained"
-            color="primary"
-            className="{classes.button}"
-            onClick={this.onVideoCreation}
-          >
-            Submit
-          </Button>
+                  </div>
+                  <div className="checkbox-body-parts">
+                    <p className="add-video-p" id="text-checkbox">
+                      Pick the targeted body parts:
+                    </p>
+                    {BODY_PARTS.map(bodyPart => (
+                      <div className="form-check form-check-inline">
+                        <div key={BODY_PARTS.indexOf(bodyPart)}>
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id="inlineCheckbox1"
+                            value={bodyPart}
+                            onChange={this.onBodyPartsChange}
+                            // checked={this.state.bodyParts.includes(bodyPart)}
+                          />
+                          <label
+                            className="form-check-label"
+                            for="inlineCheckbox1"
+                          >
+                            {bodyPart}
+                          </label>
+                        </div>
+                      </div>
+                    ))}
+                    <p className="add-video-p" id="error-msg">
+                      {this.state.bodyPartsError}
+                    </p>
+                  </div>
+                  <div className="difficulty-level">
+                    <p className="add-video-p">
+                      Select the difficulty level of the video:
+                    </p>
+                    <DifficultyLevel
+                      initialDifficulty={this.state.difficultyLevel}
+                      onDifficultyLevelChange={this.onDifficultyLevelChange}
+                    />
+                  </div>
+                  <div className="add-video-button">
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      className="{classes.button}"
+                      onClick={this.onVideoCreation}
+                    >
+                      Submit
+                    </Button>
+                  </div>
+                  <p id="warning">
+                    * At the moment we only support youtube videos
+                  </p>
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
     );
   }
 }
