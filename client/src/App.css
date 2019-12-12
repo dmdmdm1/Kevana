@@ -134,23 +134,34 @@ h1 {
   margin-top: 20px;
 }
 
-.container-fluid {
+.card-container {
   margin-top: 15px;
+  text-align: center;
 }
 
 .add-video-page {
   margin-top: 30px;
+  text-align: center;
 }
 
 .add-card {
   width: 38rem;
   background-color: white;
   border: 2px solid #17a2b8;
-  padding: 10px;
+  padding: 20px;
+  text-align: center;
+  margin-top: 45px;
+  display: inline-block;
+  margin-left: 380px;
 }
 
 .add-video-p {
   font-size: 14px;
+  font-weight: 300;
+}
+
+#text-checkbox {
+  margin-bottom: 30px;
 }
 
 .MuiButton-containedPrimary {
@@ -165,6 +176,37 @@ h1 {
   color: #17a2b8 !important;
 }
 
+#warning {
+  font-size: 10px;
+}
+
+.url-input-field {
+  margin-top: 10 px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.checkbox-body-parts {
+  margin-bottom: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.difficulty-level {
+  margin-left: 10px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  margin-right: 10px;
+}
+
+.makeStyles-formControl-69 {
+  margin-top: 10px;
+}
+
+.add-video-button {
+  margin-bottom: 25px;
+}
 /* if we didn't want it to look like a button */
 /* #so {
   border: 0;

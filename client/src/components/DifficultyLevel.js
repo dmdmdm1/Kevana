@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
     minWidth: 120
   },
   selectEmpty: {
-    marginTop: theme.spacing(2)
+    marginTop: theme.spacing(1)
   }
 }));
 
@@ -34,9 +34,9 @@ export default function DifficultyLevel(props) {
           <MenuItem value={"Intermediate"}>Intermediate</MenuItem>
           <MenuItem value={"Advanced"}>Advanced</MenuItem>
         </Select>
-        <FormHelperText>
+        {/* <FormHelperText>
           Please select the difficulty level of the video
-        </FormHelperText>
+        </FormHelperText> */}
       </FormControl>
     </div>
   );
