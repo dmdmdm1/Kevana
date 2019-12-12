@@ -24,7 +24,7 @@ class FeedHistory extends React.Component {
                 </p>
               </div>
               <p className="card-text">{itemInHistory.user_name.email + " "}</p>
-              <Link to={`/videos/${itemInHistory.practiced_video.video_id}`}>
+              <Link to={`/videos/${itemInHistory.practiced_video._id}`}>
                 <button className="watch" type="button">
                   watch
                 </button>
