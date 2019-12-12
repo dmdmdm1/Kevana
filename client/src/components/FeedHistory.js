@@ -11,15 +11,30 @@ class FeedHistory extends React.Component {
         ) : null}
         {this.props.history.map(itemInHistory => (
           <div key={itemInHistory._id}>
-            {/* here we can link to the user page of the person that practiced video */}
-            <Link to={`/profile/${itemInHistory.user_name._id}`}>
-              {itemInHistory.user_name.email + " "}
-            </Link>
-            practiced the video:
-            <Link to={`/videos/${itemInHistory.practiced_video._id}`}>
-              {itemInHistory.practiced_video.title}{" "}
-            </Link>
-            {/* -- video_id: {itemInHistory.practiced_video.video_id}{" "} */}
+            <div className="feed-item">
+              <img
+                alt="Card cap"
+                className="card-img-top"
+                src={itemInHistory.practiced_video.image}
+              ></img>
+              <div className="card-body">
+                <p className="card-title">
+                  {itemInHistory.user_name.email + " "} practiced the video:
+                  <em>{" " + itemInHistory.practiced_video.title}</em>
+                </p>
+              </div>
+              <p className="card-text">{itemInHistory.user_name.email + " "}</p>
+              <Link to={`/videos/${itemInHistory.practiced_video.video_id}`}>
+                <button className="watch" type="button">
+                  watch
+                </button>
+              </Link>
+              <Link to={`/profile/${itemInHistory.user_name._id}`}>
+                <button className="profile-button" type="button">
+                  {itemInHistory.user_name.email}
+                </button>
+              </Link>
+            </div>
           </div>
         ))}
       </div>

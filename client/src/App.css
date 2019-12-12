@@ -113,6 +113,14 @@ h1 {
   border: 1px solid #17a2b8;
 }
 
+.profile-button {
+  color: white;
+  background-color: #17a2b8;
+  border: 1px solid #17a2b8;
+  margin-left: 20px;
+  margin-top: 15px;
+}
+
 .back {
   color: white;
   background-color: pink;
@@ -219,6 +227,8 @@ h1 {
 #feed-list-container {
   display: flex;
   margin-left: 10px;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 #feed-title {
@@ -245,6 +255,16 @@ h1 {
   margin-left: 600px;
   margin-top: 20px;
   color: white;
+}
+
+.feed-item {
+  width: 200px;
+  margin-bottom: 20px;
+  padding: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  background-color: white;
+  text-align: center;
 }
 
 /* if we didn't want it to look like a button */
