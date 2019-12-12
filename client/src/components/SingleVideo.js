@@ -61,7 +61,7 @@ class SingleVideo extends React.Component {
           </div>
         </div>
         <div className="feed-container">
-          <h4 id="feed-title">Here's what users have been Practicing</h4>
+          <h4 id="feed-title">Here's what users have been practicing</h4>
           <FeedHistory
             history={this.state.history}
             isLoading={this.state.historyIsLoading}
