@@ -110,13 +110,13 @@ class AddVideo extends Component {
   // };
   render() {
     return (
-      <div class="add-video-page">
+      <div className="add-video-page">
         <h2>Add a video</h2>
-        <div class="card-container col-md-6">
+        <div className="card-container col-md-6">
           <form className="{classes.container}" noValidate autoComplete="off">
             <div>
-              <div class="well">
-                <div class="add-card">
+              <div className="well">
+                <div className="add-card">
                   <div className="url-input-field">
                     <p className="add-video-p">
                       Enter the url of the video you want to add*:
@@ -140,17 +140,20 @@ class AddVideo extends Component {
                       Pick the targeted body parts:
                     </p>
                     {BODY_PARTS.map(bodyPart => (
-                      <div class="form-check form-check-inline">
+                      <div className="form-check form-check-inline">
                         <div key={BODY_PARTS.indexOf(bodyPart)}>
                           <input
-                            class="form-check-input"
+                            className="form-check-input"
                             type="checkbox"
                             id="inlineCheckbox1"
                             value={bodyPart}
                             onChange={this.onBodyPartsChange}
                             // checked={this.state.bodyParts.includes(bodyPart)}
                           />
-                          <label class="form-check-label" for="inlineCheckbox1">
+                          <label
+                            className="form-check-label"
+                            for="inlineCheckbox1"
+                          >
                             {bodyPart}
                           </label>
                         </div>
