@@ -69,7 +69,6 @@ export default class Home extends Component {
   render() {
     const videos =
       this.state.search === "" ? this.state.videos : this.state.displayedVideos;
-    console.log(videos);
     let filteredVideos = videos.filter(video => {
       if (this.state.filter.length) {
         if (
@@ -85,9 +84,7 @@ export default class Home extends Component {
       filteredVideos = filteredVideos.filter(video => {
         let found = false;
         this.state.filter.bodyParts.forEach(b => {
-          console.log(b, video.bodyParts);
           if (video.bodyParts.includes(b)) {
-            console.log("TRUEEEE");
             found = true;
           }
         });
@@ -103,7 +100,6 @@ export default class Home extends Component {
       });
     }
 
-    console.log("filtered", filteredVideos);
     let videoResults = null;
     if (this.state.search === "" && this.state.filter === {}) {
       videoResults = this.state.videos;

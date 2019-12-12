@@ -33,7 +33,6 @@ class SingleVideo extends React.Component {
     axios
       .post(`/api/history/practiced/${this.props.match.params.id}`)
       .then(response => {
-        console.log(response);
         // this.props.history.push(`videos/${response.data._id}`) // go to created video
       });
   };
@@ -42,7 +41,6 @@ class SingleVideo extends React.Component {
       <div className="single-video-page">
         <div className="single-video-container">
           <h4>{this.state.video.title}</h4>
-          {console.log(this.state)}
           <ReactPlayer url={this.state.video.link} />
           <div className="button-wrapper">
             <button
