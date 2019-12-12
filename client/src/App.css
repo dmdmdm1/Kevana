@@ -53,7 +53,7 @@ h1 {
   border: none;
   border-radius: 25px;
   outline: none;
-  margin-left: 100px;
+  margin-left: 120px;
 }
 
 .business {
@@ -127,6 +127,7 @@ h1 {
 .single-video-page {
   display: flex;
   padding: 10px;
+  padding-bottom: 0;
 }
 
 .single-video-container {
@@ -153,7 +154,7 @@ h1 {
   text-align: center;
   margin-top: 45px;
   display: inline-block;
-  margin-left: 380px;
+  margin-left: 340px;
 }
 
 .add-video-p {
