@@ -50,13 +50,17 @@ class SomeProfile extends React.Component {
       return <h1>Loading.....</h1>;
     }
     return (
-      <div>
+      <div className="profile-container">
         {this.state.isLoading ? (
           <p>loading...</p>
         ) : (
           <div>
             <ShowProfileData dataToBeShown={this.state.profileData} />
-            <button type="button" onClick={this.changeFollowStatus}>
+            <button
+              className="follow-unfollow"
+              type="button"
+              onClick={this.changeFollowStatus}
+            >
               {/* {this.props.theLoggedInUser.follows.includes(this.state.profileData.userId_) ? "unfollow" : "follow"} */}
               {this.props.theLoggedInUser.follows.includes(
                 this.props.match.params.id

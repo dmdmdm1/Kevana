@@ -148,7 +148,6 @@ class AddVideo extends Component {
                             id="inlineCheckbox1"
                             value={bodyPart}
                             onChange={this.onBodyPartsChange}
-                            // checked={this.state.bodyParts.includes(bodyPart)}
                           />
                           <label
                             className="form-check-label"
@@ -159,9 +158,6 @@ class AddVideo extends Component {
                         </div>
                       </div>
                     ))}
-                    <p className="add-video-p" id="error-msg">
-                      {this.state.bodyPartsError}
-                    </p>
                   </div>
                   <div className="difficulty-level">
                     <p className="add-video-p">
@@ -182,6 +178,9 @@ class AddVideo extends Component {
                       Submit
                     </Button>
                   </div>
+                  <p className="add-video-p" id="error-msg">
+                    {this.state.bodyPartsError}
+                  </p>
                   <p id="warning">
                     * At the moment we only support youtube videos
                   </p>
