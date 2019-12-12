@@ -11,7 +11,6 @@ router.get("/", function(req, res, next) {
     .populate("user_name")
     .populate("practiced_video")
     .then(response => {
-      console.log(response);
       res.json(response);
     })
     .catch(err => {

@@ -60,7 +60,6 @@ router.post("/", (req, res, next) => {
   }
 
   const id = url.query.v;
-  console.log("new video id", id);
 
   let video;
   let tags;

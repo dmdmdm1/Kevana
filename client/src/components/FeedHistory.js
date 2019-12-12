@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 class FeedHistory extends React.Component {
   render() {
@@ -24,11 +24,15 @@ class FeedHistory extends React.Component {
                 </p>
               </div>
               <p className="card-text">{itemInHistory.user_name.email + " "}</p>
-              <Link to={`/videos/${itemInHistory.practiced_video._id}`}>
-                <button className="watch" type="button">
-                  watch
-                </button>
-              </Link>
+              <button
+                className="watch"
+                type="button"
+                onClick={event =>
+                  (window.location.href = `/videos/${itemInHistory.practiced_video._id}`)
+                }
+              >
+                watch
+              </button>
               <Link to={`/profile/${itemInHistory.user_name._id}`}>
                 <button className="profile-button" type="button">
                   {itemInHistory.user_name.email}

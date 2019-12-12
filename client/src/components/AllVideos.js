@@ -4,7 +4,6 @@ import LazyLoad from "react-lazyload";
 
 class AllVideos extends React.Component {
   render() {
-    console.log("props", this.props);
     return (
       <div id="video-list-container">
         <div id="video-container">
