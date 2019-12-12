@@ -16,6 +16,10 @@ h2 {
   color: #17a2b8;
 }
 
+h4 {
+  color: #17a2b8;
+}
+
 #video-container {
   display: flex;
   flex-wrap: wrap;

@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 import AllVideos from "./AllVideos";
-import FeedHistory from "./FeedHistory";
-//import Tags from "./Tags";
 import { Button } from "react-bootstrap";
 import { ButtonToolbar } from "react-bootstrap";
 
@@ -11,27 +9,18 @@ export default class Home extends Component {
     search: "",
     videos: [],
     displayedVideos: [],
-    history: [],
     isLoading: true,
-    historyIsLoading: true,
     filter: {
       bodyParts: []
     }
   };
   componentDidMount() {
     this.getAllVideos();
-    this.getHistoryLatest20();
   }
 
   getAllVideos = () => {
     axios.get("/api/videos").then(response => {
       this.setState({ videos: response.data, isLoading: false }); // this triggers a re-render
-    });
-  };
-
-  getHistoryLatest20 = () => {
-    axios.get("/api/history").then(response => {
-      this.setState({ history: response.data, historyIsLoading: false }); // this triggers a re-render
     });
   };
 
@@ -447,10 +436,6 @@ export default class Home extends Component {
           search={this.state.search}
           isLoading={this.state.isLoading}
           videos={processedVideos}
-        />
-        <FeedHistory
-          history={this.state.history}
-          isLoading={this.state.historyIsLoading}
         />
       </div>
     );
