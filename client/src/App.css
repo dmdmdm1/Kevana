@@ -231,6 +231,22 @@ h1 {
   justify-content: center;
 }
 
+#error-msg {
+  color: red;
+}
+
+.profile-data {
+  margin-top: 40px;
+  margin-left: 20px;
+}
+
+.follow-unfollow {
+  background-color: #17a2b8;
+  margin-left: 600px;
+  margin-top: 20px;
+  color: white;
+}
+
 /* if we didn't want it to look like a button */
 /* #so {
   border: 0;
