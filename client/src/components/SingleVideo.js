@@ -2,11 +2,14 @@ import axios from "axios";
 import React from "react";
 import ReactPlayer from "react-player";
 import { Link } from "react-router-dom";
+import FeedHistory from "./FeedHistory";
 
 class SingleVideo extends React.Component {
   state = {
     video: [],
-    isLoading: true
+    isLoading: true,
+    history: [],
+    historyIsLoading: true
   };
 
   getSingleVideo = () => {
@@ -15,8 +18,15 @@ class SingleVideo extends React.Component {
     });
   };
 
+  getHistoryLatest20 = () => {
+    axios.get("/api/history").then(response => {
+      this.setState({ history: response.data, historyIsLoading: false }); // this triggers a re-render
+    });
+  };
+
   componentDidMount() {
     this.getSingleVideo();
+    this.getHistoryLatest20();
   }
 
   practicedButtonHandler = () => {
@@ -47,6 +57,12 @@ class SingleVideo extends React.Component {
               Back to all videos
             </button>
           </Link>
+        </div>
+        <div className="feed-container">
+          <FeedHistory
+            history={this.state.history}
+            isLoading={this.state.historyIsLoading}
+          />
         </div>
       </div>
     );
