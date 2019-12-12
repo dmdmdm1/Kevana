@@ -125,13 +125,14 @@ h1 {
   margin-top: 20px;
 }
 .single-video-page {
-  text-align: center;
-  margin-top: 30px;
+  display: flex;
+  padding: 10px;
 }
 
 .single-video-container {
   display: inline-block;
-  margin-top: 20px;
+  margin-top: 80px;
+  margin-left: 20px;
 }
 
 .card-container {
@@ -207,12 +208,33 @@ h1 {
 .add-video-button {
   margin-bottom: 25px;
 }
+
+.feed-container {
+  margin-top: 80px;
+  margin-left: 20px;
+  border-left: 6px solid #17a2b8;
+}
+
+#feed-list-container {
+  display: flex;
+  margin-left: 10px;
+}
+
+#feed-title {
+  margin-left: 10px;
+}
+
+.button-wrapper {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
 /* if we didn't want it to look like a button */
 /* #so {
   border: 0;
   background-color: transparent;
 } */
-
 /* if we want to change link color */
 /* nav .navbar-nav li a {
   color: #09d3ac !important;
