@@ -19,7 +19,7 @@
     "express-session": "^1.17.0",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
-    "luxon": "^1.21.2",
+    "luxon": "^1.28.1",
     "mongoose": "^5.7.8",
     "morgan": "~1.9.1",
     "nodemailer": "^6.3.1",
